@@ -22,8 +22,10 @@
 <table class="table">
     <thead>
     <tr>
-        <th>Transaction ID</th>
+        @* <th>Transaction ID</th> *@
         <th>Amount</th>
+        <th>Origin</th>
+        <th>Destination</th>
         <th>Amount Converted</th>
         <th>Date</th>
     </tr>
@@ -32,8 +34,10 @@
     @foreach (var transaction in Model.Transactions)
     {
         <tr>
-            <td><a asp-controller="Transaction" asp-action="Detail" asp-route-id="@transaction.Id">@transaction.Id</a></td>
+            @* <td><a asp-controller="Transaction" asp-action="Detail" asp-route-id="@transaction.Id">@transaction.Id</a></td> *@
             <td>@transaction.Amount</td>
+            <td>@transaction.Exchange.SenderCountry.Name</td>
+            <td>@transaction.Exchange.ReceiverCountry.Name</td>
             <td>@transaction.AmountConverted</td>
             <td>@transaction.TransactionDate</td>
         </tr>
@@ -46,7 +50,7 @@
 <table class="table">
     <thead>
     <tr>
-        <th>Trolley ID</th>
+        @* <th>Trolley ID</th> *@
         <th>Date</th>
         <th>Total</th>
     </tr>
@@ -55,7 +59,7 @@
     @foreach (var trolley in Model.Trolleys)
     {
         <tr>
-            <td><a asp-controller="Trolley" asp-action="Detail" asp-route-id="@trolley.Id">@trolley.Id</a></td>
+            @* <td><a asp-controller="Trolley" asp-action="Detail" asp-route-id="@trolley.Id">@trolley.Id</a></td> *@
             <td>@trolley.TransactionDate</td>
             <td>@trolley.Total</td>
         </tr>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SOFT703.Data;
 using SOFT703.Models;
 using SOFT703.Models.ViewModels;
@@ -109,17 +110,24 @@ public class LoginController : Controller
             return NotFound();
         }
 
-        var transactions = _context.Transaction.Where(t => t.UserId == userId).ToList();
-        var trolleys = _context.Trolley.Where(t => t.UserId == userId).ToList();
+        var transactions = _context.Transaction
+            .Where(t => t.UserId == userId)
+            .Include(t => t.Exchange)
+            .ThenInclude(e => e.SenderCountry) // Include sender country
+            .Include(t => t.Exchange)
+            .ThenInclude(e => e.ReceiverCountry) // Include receiver country
+            .ToList();
 
+    
         var viewModel = new UserDetailViewModel
         {
             User = user,
             Transactions = transactions,
-            Trolleys = trolleys
+            Trolleys = _context.Trolley.Where(t => t.UserId == userId).ToList()
         };
 
-        return View("UserDetail",viewModel);
+        return View("UserDetail", viewModel);
     }
+
 
 }

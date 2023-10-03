@@ -2,5 +2,7 @@
 
 public class MarketPlaceViewModel
 {
-    
+    public List<Product> Catalog { get; set; }
+    public List<TrolleyItemViewModel> TrolleyItems { get; set; }
+    public double Total { get; set; }
 }

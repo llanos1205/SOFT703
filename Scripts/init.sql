@@ -52,3 +52,15 @@ WHILE @@FETCH_STATUS = 0
 
 CLOSE cursor_agents;
 DEALLOCATE cursor_agents;
+           
+-- Generate random data for the Products table
+-- Generate random data for the Products table
+INSERT INTO Product (Name, Photo, Stock, Price)
+SELECT
+    CONCAT('Product', CAST(ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS VARCHAR(10))),
+    'https://example.com/path/to/image' + CAST(ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS VARCHAR(10)),
+    ROUND(RAND() * (50 - 10) + 10, 0), -- Random stock between 10 and 50
+    ROUND(RAND() * (30 - 5) + 5, 2) -- Random price between 5.00 and 30.00
+FROM
+    (SELECT ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS n) AS numbers;
+

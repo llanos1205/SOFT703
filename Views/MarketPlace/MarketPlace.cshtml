@@ -1,0 +1,64 @@
+﻿@model SOFT703.Models.ViewModels.MarketPlaceViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+
+<div class="row">
+    <div class="col-md-8">
+        <!-- Catalog -->
+        <div class="row">
+            @foreach (var product in Model.Catalog)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="@product.Photo" class="card-img-top" alt="Product Image">
+                        <div class="card-body">
+                            <h5 class="card-title">@product.Name</h5>
+                            <p class="card-text">Price: $@product.Price</p>
+                            <p class="card-text">In Stock: @product.Stock</p>
+                        </div>
+                        <form method="post" asp-controller="MarketPlace" asp-action="AddToTrolley">
+                            <input type="hidden" name="productId" value="@product.Id" style="visibility:hidden;line-height:0;"/>
+                            <button class="btn btn-primary" type="submit">Add to Trolley</button>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-md-4">
+        <!-- Trolley -->
+        <h3>Trolley</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.TrolleyItems)
+                {
+                    <tr>
+                        <td>@item.ProductName</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.Total</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <p>Total: $@Model.Total</p>
+    </div>
+</div>
+
+<script>
+    function addToTrolley(productId) {
+        // Implement JavaScript logic to add the product to the trolley
+        // You can use AJAX to interact with the server and update the trolley
+        // For simplicity, you can trigger a server-side action to add the product to the trolley.
+    }
+</script>
