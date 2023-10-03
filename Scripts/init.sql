@@ -1,4 +1,6 @@
-﻿DECLARE @MinRate DECIMAL(18, 6) = 1;
+﻿
+
+DECLARE @MinRate DECIMAL(18, 6) = 1;
 DECLARE @MaxRate DECIMAL(18, 6) = 100;
 
 DECLARE @AgentId INT;
