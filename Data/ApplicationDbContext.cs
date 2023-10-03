@@ -4,7 +4,7 @@ using SOFT703.Models;
 
 namespace SOFT703.Data;
 
-public class ApplicationDbContext : IdentityDbContext
+public class ApplicationDbContext : IdentityDbContext<User, Role, string>
 {
     public DbSet<Agent> Agent { get; set; }
     public DbSet<Country> Country { get; set; }

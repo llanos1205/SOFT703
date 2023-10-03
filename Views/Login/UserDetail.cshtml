@@ -1,0 +1,64 @@
+﻿@model SOFT703.Models.ViewModels.UserDetailViewModel
+
+@{
+    ViewBag.Title = "User Detail";
+    Layout = "_Layout"; // Set your layout page here
+}
+
+<h1>User Detail</h1>
+
+<!-- Display user data -->
+<h2>User Information</h2>
+<div>
+    <p><strong>Username:</strong> @Model.User.UserName</p>
+    <p><strong>Email:</strong> @Model.User.Email</p>
+    <p><strong>Phone:</strong> @Model.User.PhoneNumber</p>
+    <p><strong>First Name:</strong> @Model.User.FirstName</p>
+    <p><strong>Last Name:</strong> @Model.User.LastName</p>
+</div>
+
+<!-- Display transactions related to the user -->
+<h2>User Transactions</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Transaction ID</th>
+        <th>Amount</th>
+        <th>Amount Converted</th>
+        <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var transaction in Model.Transactions)
+    {
+        <tr>
+            <td><a asp-controller="Transaction" asp-action="Detail" asp-route-id="@transaction.Id">@transaction.Id</a></td>
+            <td>@transaction.Amount</td>
+            <td>@transaction.AmountConverted</td>
+            <td>@transaction.TransactionDate</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<!-- Display trolleys related to the user -->
+<h2>User Trolleys</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Trolley ID</th>
+        <th>Date</th>
+        <th>Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var trolley in Model.Trolleys)
+    {
+        <tr>
+            <td><a asp-controller="Trolley" asp-action="Detail" asp-route-id="@trolley.Id">@trolley.Id</a></td>
+            <td>@trolley.TransactionDate</td>
+            <td>@trolley.Total</td>
+        </tr>
+    }
+    </tbody>
+</table>

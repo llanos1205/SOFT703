@@ -4,9 +4,12 @@
     ViewBag.Title = "Send Money";
     Layout = "_Layout";
 }
-
+<link rel="stylesheet" href="~/css/site.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.0.3/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.0.3/dist/sweetalert2.min.js"></script>
 <form asp-controller="SendMoney" asp-action="SendMoney" method="post">
-    <div class="form-group">
+<div class="grid-container">
+    <div class="cell-00">
         <label for="SelectedAgentId">Select Agent</label>
         <select asp-for="SelectedAgentId" class="form-control" id="SelectedAgentId">
             @foreach (var agent in Model.Agents)
@@ -15,62 +18,65 @@
             }
         </select>
     </div>
-
-    <div class="form-group">
+    <div class="cell-01"></div>
+    <div class="cell-02"></div>
+    <div class="cell-10">
         <label for="SelectedSenderCountryId">Sender Country</label>
         <select asp-for="SelectedSenderCountryId" class="form-control" id="SelectedSenderCountryId">
             @foreach (var country in Model.SenderCountries)
             {
-                <option value="@country.Value">@country.Text</option>
+            <option value="@country.Value">@country.Text</option>
             }
         </select>
     </div>
-
-    <div class="form-group">
+    <div class="cell-11">
+        <label for="ExchangeRate">Exchange Rate</label>
+        <p id="ExchangeRateLabel">@Model.ExchangeRate</p>
+    </div>
+    <div class="cell-12">
         <label for="SelectedReceiverCountryId">Receiver Country</label>
         <select asp-for="SelectedReceiverCountryId" class="form-control" id="SelectedReceiverCountryId">
             @foreach (var country in Model.ReceiverCountries)
             {
-                <option value="@country.Value">@country.Text</option>
+            <option value="@country.Value">@country.Text</option>
             }
         </select>
     </div>
-
-    <div class="form-group">
-        <label for="ExchangeRate">Exchange Rate</label>
-        <p id="ExchangeRateLabel">@Model.ExchangeRate</p>
-    </div>
-
-    <div class="form-group">
+    <div class="cell-20">
         <label for="AmountToSend">Amount to Send</label>
         <input asp-for="AmountToSend" class="form-control" id="AmountToSend" />
     </div>
-    <div class="form-group">
+    <div class="cell-21">
         <label for="TotalConversion">Total Conversion</label>
         <p id="TotalConversionLabel">@Model.TotalConversion</p>
     </div>
     <input type="hidden" id="ExchangeRate" value="@Model.ExchangeRate" />
+    <div class="cell-22">
+        <button type="submit" class="btn btn-primary" id="SendMoneyButton">Send Money</button>
+    </div>
+</div>
 
-    <button type="submit" class="btn btn-primary">Send Money</button>
 </form>
-
 @section Scripts {
     <script>
        $(document).ready(function () {
+           // Function to calculate and update the total conversion
+           function updateTotalConversion() {
+               var exchangeRate = parseFloat($('#ExchangeRate').val()) || 1.00;
+               var amountToSend = parseFloat($('#AmountToSend').val()) || 0.00;
+               var totalConversion = (exchangeRate * amountToSend).toFixed(2);
+               $('#TotalConversionLabel').text(totalConversion);
+           }
+
            // Initialize the Exchange Rate label
            var exchangeRate = parseFloat($('#ExchangeRate').val()) || 1.00;
            $('#ExchangeRateLabel').text(exchangeRate.toFixed(2));
        
            // Handle input change event for the "Amount to Send" input
-           $('#AmountToSend').on('input', function () {
-               exchangeRate = parseFloat($('#ExchangeRate').val()) || 1.00;
-               var amountToSend = parseFloat($(this).val()) || 0.00;
-               var totalConversion = (exchangeRate * amountToSend).toFixed(2);
-               $('#TotalConversionLabel').text(totalConversion);
-           });
+           $('#AmountToSend').on('input', updateTotalConversion);
        
            // Handle change events of sender and receiver country select elements
-           $('#SelectedSenderCountryId, #SelectedReceiverCountryId').change(function () {
+           $('#SelectedSenderCountryId, #SelectedReceiverCountryId, #SelectedAgentId').change(function () {
                var senderCountryId = $('#SelectedSenderCountryId').val();
                var receiverCountryId = $('#SelectedReceiverCountryId').val();
        
@@ -93,6 +99,9 @@
        
                            // Update the hidden input field with the new exchange rate
                            $('#ExchangeRate').val(data.exchangeRate);
+       
+                           // Update the total conversion
+                           updateTotalConversion();
                        },
                        error: function () {
                            $('#ExchangeRateLabel').text('N/A');
@@ -100,6 +109,22 @@
                    });
                }
            });
+
+           // Handle click event for the "Send Money" button
+           $('#SendMoneyButton').on('click', function (e) {
+               e.preventDefault(); // Prevent the default form submission behavior
+
+               // Confirm the user's action (you can use a library like SweetAlert for a better UI)
+               var confirmed = confirm('Are you sure you want to send money?');
+
+               if (confirmed) {
+                   // Submit the form
+                   $('form').submit();
+               }
+           });
+
+           // Initial update of total conversion
+           updateTotalConversion();
        });
     </script>
 }

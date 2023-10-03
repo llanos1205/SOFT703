@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SOFT703.Data;
 using SOFT703.Models;
@@ -19,6 +21,7 @@ public class SendMoneyController : Controller
     {
         return View();
     }
+    [Authorize]
     public IActionResult SendMoney()
     {
         var viewModel = new SendMoneyViewModel()
@@ -62,45 +65,48 @@ public class SendMoneyController : Controller
     }
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize]
     public IActionResult SendMoney(SendMoneyViewModel viewModel)
     {
         if (ModelState.IsValid)
         {
-            // Process the form data, perform calculations, and save data to the database as needed.
-            // You can access viewModel.SelectedAgentId, viewModel.SelectedSenderCountryId,
-            // viewModel.SelectedReceiverCountryId, viewModel.AmountToSend, etc.
+            // Validate the model and perform necessary checks
 
-            // Calculate the total amount based on the exchange rate and other factors.
-            double exchangeRate = viewModel.ExchangeRate; // Exchange rate from the view model
-            double amountToSend = viewModel.AmountToSend; // Amount to send from the view model
-            double totalConversion = exchangeRate * amountToSend;
+            // Find the exchange that matches the combo boxes of countries and agent
+            Exchange exchange = _context.Exchange.FirstOrDefault(x =>
+                x.SenderCountryId == viewModel.SelectedSenderCountryId &&
+                x.ReceiverCountryId == viewModel.SelectedReceiverCountryId &&
+                x.AgentId == viewModel.SelectedAgentId);
 
-            // Create a new Transaction entity and populate its properties
-            var exchangeFound = ExchangeFound(viewModel.SelectedSenderCountryId, viewModel.SelectedReceiverCountryId,
-                viewModel.SelectedAgentId);
-            var transaction = new Transaction()
+            if (exchange != null)
             {
-                ExchangeId = exchangeFound.Id,
-                Amount = amountToSend
-            };
+                // Create a new transaction
+                var total = viewModel.AmountToSend * exchange.Rate;
+                var transaction = new Transaction
+                {
+                    Amount = viewModel.AmountToSend,
+                    AmountConverted = total,
+                    UserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value, // Get the user's ID
+                    ExchangeId = exchange.Id,
+                    TransactionDate = DateTime.Now 
+                };
 
-            // Add the transaction to the database and save changes
-            _context.Transaction.Add(transaction);
-            _context.SaveChanges();
+                // Save the transaction to the database
+                _context.Transaction.Add(transaction);
+                _context.SaveChanges();
 
-            // Redirect to a success page or return a view.
-
-            // For example, redirect to a success page
-            return RedirectToAction("Success");
+                // Redirect to a success page or return a view
+                // You can also display a success message
+                return SendMoney();// Replace "Success" with your success page/action
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Exchange rate not found for the selected countries and agent.");
+            }
         }
 
-        // If ModelState is not valid, return to the same view with validation errors.
+        // If ModelState is not valid or exchange rate is not found, return to the same view with validation errors
         return View(viewModel);
     }
 
-
-    public IActionResult Success()
-    {
-        throw new NotImplementedException();
-    }
 }
