@@ -36,22 +36,24 @@
             <thead>
                 <tr>
                     <th>Product</th>
+                    <th>Price</th>
                     <th>Quantity</th>
-                    <th>Total</th>
+                    <th>SubTotal</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.TrolleyItems)
+                @foreach (var item in Model.CurrentTrolley.ProductXTrolleys)
                 {
                     <tr>
-                        <td>@item.ProductName</td>
+                        <td>@item.Product.Name</td>
+                        <td>@item.Product.Price</td>
                         <td>@item.Quantity</td>
-                        <td>@item.Total</td>
+                         <td>@(item.Quantity * item.Product.Price)</td>
                     </tr>
                 }
             </tbody>
         </table>
-        <p>Total: $@Model.Total</p>
+        <p>Total: $@Model.CurrentTrolley.Total</p>
     </div>
 </div>
 

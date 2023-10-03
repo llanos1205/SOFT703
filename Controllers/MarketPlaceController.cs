@@ -12,16 +12,18 @@ public class MarketPlaceController : Controller
 {
     // GET
     private readonly ApplicationDbContext _context;
+
     public MarketPlaceController(ApplicationDbContext context)
     {
         _context = context;
-
     }
+
     [Authorize]
     public IActionResult MarketPlace()
     {
         var currentUser = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        var currentTrolley = _context.Trolley.FirstOrDefault(x => x.UserId == currentUser && x.IsCurrent);
+        var currentTrolley = _context.Trolley.Include(x => x.ProductXTrolleys).ThenInclude(x => x.Product)
+            .FirstOrDefault(x => x.UserId == currentUser && x.IsCurrent);
         if (currentTrolley == null)
         {
             var newTrolley = new Trolley()
@@ -30,10 +32,9 @@ public class MarketPlaceController : Controller
                 IsCurrent = true,
                 Total = 0
             };
-            var result =_context.Trolley.Add(newTrolley);
+            var result = _context.Trolley.Add(newTrolley);
             _context.SaveChanges();
             currentTrolley = result.Entity;
-            
         }
 
         var products = _context.Product.ToList();
@@ -41,12 +42,13 @@ public class MarketPlaceController : Controller
         var mpViewModel = new MarketPlaceViewModel
         {
             Total = currentTrolley.Total,
+            CurrentTrolley = currentTrolley,
             Catalog = products,
             TrolleyItems = new List<TrolleyItemViewModel>()
         };
         return View("MarketPlace", mpViewModel);
     }
-    
+
     [HttpPost]
     [Authorize]
     public IActionResult AddToTrolley(int productId)
@@ -75,7 +77,8 @@ public class MarketPlaceController : Controller
             }
 
             // Check if the product is already in the trolley
-            var existingProduct = trolley.ProductXTrolleys.SingleOrDefault(pt => pt.ProductId == productId && pt.TrolleyId == trolley.Id);
+            var existingProduct =
+                trolley.ProductXTrolleys.SingleOrDefault(pt => pt.ProductId == productId && pt.TrolleyId == trolley.Id);
 
             if (existingProduct == null)
             {
@@ -102,5 +105,4 @@ public class MarketPlaceController : Controller
         // Redirect back to the catalog or wherever you want
         return RedirectToAction("MarketPlace"); // Replace "Index" with your catalog view
     }
-
 }
