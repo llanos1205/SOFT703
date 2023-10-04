@@ -64,3 +64,15 @@ SELECT
 FROM
     (SELECT ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS n) AS numbers;
 
+
+-- Create the 'admin' role
+INSERT INTO AspNetRoles (Id, [Name], [NormalizedName])
+VALUES ('8F8D7E0F-12F1-4C53-A1E3-9E5C53C96C00', 'admin', 'ADMINISTRAROR');
+
+-- Create the 'staff' role
+INSERT INTO AspNetRoles (Id, [Name], [NormalizedName])
+VALUES ('F50A8B88-ACD3-496B-95A1-A82A6EB3E1F4', 'staff', 'STAFF');
+
+-- Create the 'client' role
+INSERT INTO AspNetRoles (Id, [Name], [NormalizedName])
+VALUES ('4A7C9147-571F-46F1-92DB-8B74584E8478', 'client', 'CLIENT');
