@@ -1,0 +1,35 @@
+﻿@model SOFT703.Models.ViewModels.ManagementUserViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Users</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var users in Model.Users)
+    {
+        <tr>
+            <td>@users.UserName</td>
+            <td>@users.Email</td>
+            <td>@users.Phone</td>
+            <td>@users.FirstName</td>
+            <td>@users.LastName</td>
+            <td>
+                <a href="@Url.Action("Detail", "ManagementUser", new { id = users.Id })" class="btn btn-primary">Details</a>
+
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

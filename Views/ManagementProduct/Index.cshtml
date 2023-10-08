@@ -1,0 +1,43 @@
+﻿@model SOFT703.Models.ViewModels.ManagementProductViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Products</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Photo Url</th>
+        <th>Stock</th>
+        <th>Price</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var product in Model.Products)
+    {
+        <tr>
+            <td>@product.Name</td>
+            <td>
+                @if (product.Photo.Length > 30)
+                {
+                    <span title="@product.Photo">@product.Photo.Substring(0, 30)...</span>
+                }
+                else
+                {
+                    @product.Photo
+                }
+            </td>
+            <td>@product.Stock</td>
+            <td>@product.Price</td>
+            <td>
+                <a href="@Url.Action("Edit", "ManagementProduct", new { id = product.Id })" class="btn btn-primary">Edit</a>
+                
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

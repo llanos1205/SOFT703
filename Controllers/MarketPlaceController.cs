@@ -43,8 +43,8 @@ public class MarketPlaceController : Controller
         {
             Total = currentTrolley.Total,
             CurrentTrolley = currentTrolley,
-            Catalog = products,
-            TrolleyItems = new List<TrolleyItemViewModel>()
+            Catalog = products
+         
         };
         return View("MarketPlace", mpViewModel);
     }

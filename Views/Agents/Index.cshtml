@@ -1,0 +1,26 @@
+﻿@model SOFT703.Models.ViewModels.AgentsViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Agents</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Address</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var agent in Model.Agents)
+    {
+        <tr>
+            <td>@agent.Name</td>
+            <td>@agent.Address</td>
+            
+        </tr>
+    }
+    </tbody>
+</table>
