@@ -6,6 +6,8 @@
 }
 
 <h2>Products</h2>
+<a href="@Url.Action("Add", "ManagementProduct")" class="btn btn-primary">Add</a>
+
 <table class="table">
     <thead>
     <tr>
@@ -35,7 +37,7 @@
             <td>@product.Price</td>
             <td>
                 <a href="@Url.Action("Edit", "ManagementProduct", new { id = product.Id })" class="btn btn-primary">Edit</a>
-                
+                <a href="@Url.Action("Delete", "ManagementProduct", new { id = product.Id })" class="btn btn-primary">Delete</a>
             </td>
         </tr>
     }
