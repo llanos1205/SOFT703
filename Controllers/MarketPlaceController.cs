@@ -49,8 +49,7 @@ public class MarketPlaceController : Controller
         return View("MarketPlace", mpViewModel);
     }
 
-    [HttpPost]
-    [Authorize]
+
     public IActionResult AddToTrolley(int productId)
     {
         // Retrieve the product with the specified productId from the database
@@ -104,5 +103,58 @@ public class MarketPlaceController : Controller
 
         // Redirect back to the catalog or wherever you want
         return RedirectToAction("MarketPlace"); // Replace "Index" with your catalog view
+    }
+
+    public IActionResult RemoveItem(int id)
+    {
+        // Retrieve the product with the specified productId from the database
+        var product = _context.Product.Find(id);
+
+        if (product != null)
+        {
+            // Check if the user has an active trolley
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var trolley = _context.Trolley
+                .Include(t => t.ProductXTrolleys) // Eager load ProductXTrolleys
+                .SingleOrDefault(t => t.UserId == userId && t.IsCurrent);
+
+
+            if (trolley == null)
+            {
+                // Create a new trolley if one doesn't exist
+                trolley = new Trolley
+                {
+                    UserId = userId,
+                    IsCurrent = true,
+                };
+                _context.Trolley.Add(trolley);
+            }
+
+            // Check if the product is already in the trolley
+            var existingProduct =
+                trolley.ProductXTrolleys.SingleOrDefault(pt => pt.ProductId == id && pt.TrolleyId == trolley.Id);
+
+            if (existingProduct.Quantity == 1)
+            {
+                trolley.ProductXTrolleys.Remove(existingProduct);
+                
+            }
+            else
+            {
+                existingProduct.Quantity--;
+            }
+            
+
+            // Update the total in the trolley
+            trolley.Total -= product.Price;
+            
+
+            // Save changes to the database
+            _context.SaveChanges();
+        }
+
+        // Redirect back to the catalog or wherever you want
+        return RedirectToAction("MarketPlace"); // Replace "Index" with your catalog view
+
     }
 }

@@ -1,0 +1,29 @@
+﻿@model SOFT703.Models.ViewModels.ManagementUserViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+<form asp-controller="ManagementUser" asp-action="Edit" method="post">
+    <input type="hidden" asp-for="User.Id" />
+    <div class="form-group">
+        <label asp-for="User.Email">Email</label>
+        <input asp-for="User.Email" class="form-control"/>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="User.FirstName">FirstName</label>
+        <input asp-for="User.FirstName" class="form-control"/>
+
+    </div>
+    <div class="form-group">
+        <label asp-for="User.LastName">LastName</label>
+        <input asp-for="User.LastName" class="form-control"/>
+
+    </div>
+    <div class="form-group">
+        <label asp-for="User.PhoneNumber">PhoneNumber</label>
+        <input asp-for="User.PhoneNumber" class="form-control"/>
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>

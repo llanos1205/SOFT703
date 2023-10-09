@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Runtime.Intrinsics.X86;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SOFT703.Data;
 using SOFT703.Models.ViewModels;
@@ -48,10 +50,36 @@ public class ManagementUserController : Controller
 
         return View(viewModel);
     }
-    public IActionResult Edit(int id)
+ 
+    public IActionResult Edit(string id)
     {
-        throw new NotImplementedException();
+        var vm = new ManagementUserViewModel();
+        vm.User = _context.Users.FirstOrDefault(u => u.Id == id);
+        return View(vm);
     }
+
+    [HttpPost]
+    [Authorize]
+    [ValidateAntiForgeryToken]
+    public IActionResult Edit(ManagementUserViewModel vm)
+    {
+        var user= _context.Users.FirstOrDefault(u => u.Id == vm.User.Id);
+        if (user == null)
+        {
+            return NotFound();
+        }
+        else
+        {
+            user.FirstName = vm.User.LastName;
+            user.FirstName = vm.User.FirstName;
+            user.PhoneNumber = vm.User.PhoneNumber;
+            user. Email = vm.User.Email;
+            _context.SaveChanges();
+        }
+
+        return RedirectToAction("Index");
+    }
+ 
     public IActionResult Add(int id)
     {
         throw new NotImplementedException();

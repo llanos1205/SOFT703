@@ -20,10 +20,12 @@
                             <p class="card-text">Price: $@product.Price</p>
                             <p class="card-text">In Stock: @product.Stock</p>
                         </div>
-                        <form method="post" asp-controller="MarketPlace" asp-action="AddToTrolley">
-                            <input type="hidden" name="productId" value="@product.Id" style="visibility:hidden;line-height:0;"/>
-                            <button class="btn btn-primary" type="submit">Add to Trolley</button>
-                        </form>
+                        @* <form method="post" asp-controller="MarketPlace" asp-action="AddToTrolley"> *@
+                        @*     <input type="hidden" name="productId" value="@product.Id" style="visibility:hidden;line-height:0;"/> *@
+                        @*     <button class="btn btn-primary" type="submit">Add to Trolley</button> *@
+                        @* </form> *@
+                        <a href="@Url.Action("AddToTrolley", "MarketPlace", new { productId = product.Id})" class="btn btn-primary">Add</a>
+
                     </div>
                 </div>
             }
@@ -34,23 +36,32 @@
         <h3>Trolley</h3>
         <table class="table">
             <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>SubTotal</th>
-                </tr>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>SubTotal</th>
+            </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.CurrentTrolley.ProductXTrolleys)
-                {
-                    <tr>
-                        <td>@item.Product.Name</td>
-                        <td>@item.Product.Price</td>
-                        <td>@item.Quantity</td>
-                         <td>@(item.Quantity * item.Product.Price)</td>
-                    </tr>
-                }
+            @foreach (var item in Model.CurrentTrolley.ProductXTrolleys)
+            {
+                <tr>
+                    <td>@item.Product.Name</td>
+                    <td>@item.Product.Price</td>
+                    <td>@item.Quantity</td>
+                    <td>@(item.Quantity * item.Product.Price)</td>
+                    <td>
+                        <a href="@Url.Action("RemoveItem", "MarketPlace", new { id = item.Product.Id })" class="btn btn-primary">-</a>
+                        <a href="@Url.Action("AddToTrolley", "MarketPlace", new { productId = item.Product.Id })" class="btn btn-primary">+</a>
+                        @* <form method="post" asp-controller="MarketPlace" asp-action="AddToTrolley"> *@
+                        @*     <input type="hidden" name="productId" value="@item.Product.Id" style="visibility:hidden;line-height:0;"/> *@
+                        @*     <button class="btn btn-primary" type="submit">+</button> *@
+                        @* </form> *@
+
+                    </td>
+                </tr>
+            }
             </tbody>
         </table>
         <p>Total: $@Model.CurrentTrolley.Total</p>
