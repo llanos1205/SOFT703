@@ -20,10 +20,6 @@
                             <p class="card-text">Price: $@product.Price</p>
                             <p class="card-text">In Stock: @product.Stock</p>
                         </div>
-                        @* <form method="post" asp-controller="MarketPlace" asp-action="AddToTrolley"> *@
-                        @*     <input type="hidden" name="productId" value="@product.Id" style="visibility:hidden;line-height:0;"/> *@
-                        @*     <button class="btn btn-primary" type="submit">Add to Trolley</button> *@
-                        @* </form> *@
                         <a href="@Url.Action("AddToTrolley", "MarketPlace", new { productId = product.Id})" class="btn btn-primary">Add</a>
 
                     </div>
@@ -54,24 +50,14 @@
                     <td>
                         <a href="@Url.Action("RemoveItem", "MarketPlace", new { id = item.Product.Id })" class="btn btn-primary">-</a>
                         <a href="@Url.Action("AddToTrolley", "MarketPlace", new { productId = item.Product.Id })" class="btn btn-primary">+</a>
-                        @* <form method="post" asp-controller="MarketPlace" asp-action="AddToTrolley"> *@
-                        @*     <input type="hidden" name="productId" value="@item.Product.Id" style="visibility:hidden;line-height:0;"/> *@
-                        @*     <button class="btn btn-primary" type="submit">+</button> *@
-                        @* </form> *@
-
                     </td>
                 </tr>
             }
             </tbody>
         </table>
         <p>Total: $@Model.CurrentTrolley.Total</p>
+        <a href="@Url.Action("CheckOut", "MarketPlace", new { trolleyId = Model.CurrentTrolley.Id })" class="btn btn-primary">Checkout</a>
+                
     </div>
 </div>
 
-<script>
-    function addToTrolley(productId) {
-        // Implement JavaScript logic to add the product to the trolley
-        // You can use AJAX to interact with the server and update the trolley
-        // For simplicity, you can trigger a server-side action to add the product to the trolley.
-    }
-</script>

@@ -15,12 +15,14 @@ public class LoginController : Controller
     private readonly ApplicationDbContext _context;
 
 
-    public LoginController(ApplicationDbContext context,UserManager<User> userManager, SignInManager<User> signInManager)
+    public LoginController(ApplicationDbContext context, UserManager<User> userManager,
+        SignInManager<User> signInManager)
     {
         _userManager = userManager;
         _signInManager = signInManager;
         _context = context;
     }
+
     [HttpGet]
     [AllowAnonymous]
     public IActionResult Login()
@@ -40,18 +42,20 @@ public class LoginController : Controller
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
                 await _signInManager.SignInAsync(user, isPersistent: false);
-                return RedirectToAction("Index", "Home"); // Redirect to a secure page upon successful login
+                return RedirectToAction("Index", "Home");
             }
 
-            ModelState.AddModelError(string.Empty, "Invalid email or password. Please try again."); // Add the error message
+            ModelState.AddModelError(string.Empty, "Invalid email or password. Please try again.");
         }
 
         return View(model);
     }
+
     public IActionResult SignIn()
     {
         return View("SignIn");
     }
+
     [HttpPost]
     [AllowAnonymous]
     [ValidateAntiForgeryToken]
@@ -59,8 +63,7 @@ public class LoginController : Controller
     {
         if (ModelState.IsValid)
         {
-            // Create a new user
-            var user = new User()
+            var user = new User
             {
                 Email = model.Email,
                 FirstName = model.FirstName,
@@ -69,21 +72,14 @@ public class LoginController : Controller
                 EmailConfirmed = true,
                 UserName = model.Email
             };
-
-            // Use UserManager to create the user
             var result = await _userManager.CreateAsync(user, model.Password);
-
             if (result.Succeeded)
             {
-                // If user creation is successful, sign the user in
                 await _signInManager.SignInAsync(user, isPersistent: false);
-            
-                // Redirect to a success page or home page
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-                // If user creation fails, add errors to ModelState
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
@@ -91,7 +87,6 @@ public class LoginController : Controller
             }
         }
 
-        // If ModelState is not valid or user creation fails, return to the login view with validation errors
         return View("SignIn", model);
     }
 
@@ -101,7 +96,7 @@ public class LoginController : Controller
         return RedirectToAction("Index", "Home");
     }
 
- 
+
     public IActionResult UserDetail(string userId)
     {
         var user = _context.Users.FirstOrDefault(u => u.Id == userId);
@@ -118,7 +113,7 @@ public class LoginController : Controller
             .ThenInclude(e => e.ReceiverCountry) // Include receiver country
             .ToList();
 
-    
+
         var viewModel = new UserDetailViewModel
         {
             User = user,
@@ -128,6 +123,4 @@ public class LoginController : Controller
 
         return View("UserDetail", viewModel);
     }
-
-
 }

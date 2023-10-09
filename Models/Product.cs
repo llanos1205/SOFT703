@@ -7,6 +7,6 @@ public class Product
     public  string? Photo { get; set; }
     public  int Stock { get; set; }
     public  double Price { get; set; }
-    public List<ProductXTrolley>? ProductXTrolleys { get; set; } // Navigation property
+    public List<ProductXTrolley>? ProductXTrolleys { get; set; }
 
 }

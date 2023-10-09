@@ -52,21 +52,15 @@ public class MarketPlaceController : Controller
 
     public IActionResult AddToTrolley(int productId)
     {
-        // Retrieve the product with the specified productId from the database
         var product = _context.Product.Find(productId);
-
         if (product != null)
         {
-            // Check if the user has an active trolley
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var trolley = _context.Trolley
-                .Include(t => t.ProductXTrolleys) // Eager load ProductXTrolleys
+                .Include(t => t.ProductXTrolleys) 
                 .SingleOrDefault(t => t.UserId == userId && t.IsCurrent);
-
-
             if (trolley == null)
             {
-                // Create a new trolley if one doesn't exist
                 trolley = new Trolley
                 {
                     UserId = userId,
@@ -74,14 +68,10 @@ public class MarketPlaceController : Controller
                 };
                 _context.Trolley.Add(trolley);
             }
-
-            // Check if the product is already in the trolley
             var existingProduct =
                 trolley.ProductXTrolleys.SingleOrDefault(pt => pt.ProductId == productId && pt.TrolleyId == trolley.Id);
-
             if (existingProduct == null)
             {
-                // If not, add it to the trolley with a quantity of 1
                 trolley.ProductXTrolleys.Add(new ProductXTrolley
                 {
                     Product = product,
@@ -90,38 +80,25 @@ public class MarketPlaceController : Controller
             }
             else
             {
-                // If the product is already in the trolley, increase its quantity by 1
                 existingProduct.Quantity++;
             }
-
-            // Update the total in the trolley
             trolley.Total += product.Price;
-
-            // Save changes to the database
             _context.SaveChanges();
         }
-
-        // Redirect back to the catalog or wherever you want
-        return RedirectToAction("MarketPlace"); // Replace "Index" with your catalog view
+        return RedirectToAction("MarketPlace"); 
     }
 
     public IActionResult RemoveItem(int id)
     {
-        // Retrieve the product with the specified productId from the database
         var product = _context.Product.Find(id);
-
         if (product != null)
         {
-            // Check if the user has an active trolley
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var trolley = _context.Trolley
-                .Include(t => t.ProductXTrolleys) // Eager load ProductXTrolleys
+                .Include(t => t.ProductXTrolleys) 
                 .SingleOrDefault(t => t.UserId == userId && t.IsCurrent);
-
-
             if (trolley == null)
             {
-                // Create a new trolley if one doesn't exist
                 trolley = new Trolley
                 {
                     UserId = userId,
@@ -129,8 +106,6 @@ public class MarketPlaceController : Controller
                 };
                 _context.Trolley.Add(trolley);
             }
-
-            // Check if the product is already in the trolley
             var existingProduct =
                 trolley.ProductXTrolleys.SingleOrDefault(pt => pt.ProductId == id && pt.TrolleyId == trolley.Id);
 
@@ -143,18 +118,26 @@ public class MarketPlaceController : Controller
             {
                 existingProduct.Quantity--;
             }
-            
-
-            // Update the total in the trolley
             trolley.Total -= product.Price;
-            
-
-            // Save changes to the database
             _context.SaveChanges();
         }
+        return RedirectToAction("MarketPlace"); 
 
-        // Redirect back to the catalog or wherever you want
-        return RedirectToAction("MarketPlace"); // Replace "Index" with your catalog view
+    }
 
+    public IActionResult CheckOut(int trolleyid)
+    {
+        var trolley = _context.Trolley.Find(trolleyid);
+        trolley.IsCurrent = false;
+        trolley.TransactionDate = DateTime.Now;
+        var newTrolley = new Trolley()
+        {
+            UserId = trolley.UserId,
+            IsCurrent = true,
+            Total = 0
+        };
+        var result = _context.Trolley.Add(newTrolley);
+        _context.SaveChanges();
+        return RedirectToAction("MarketPlace");
     }
 }

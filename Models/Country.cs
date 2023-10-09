@@ -4,6 +4,6 @@ public class Country
 {
     public int Id { get; set; }
     public string? Name { get; set; }
-    public List<Exchange> SenderExchanges { get; set; } // Exchanges where this is the sender country
-    public List<Exchange> ReceiverExchanges { get; set; } // Exchanges where this is the receiver country
+    public List<Exchange> SenderExchanges { get; set; } 
+    public List<Exchange> ReceiverExchanges { get; set; } 
 }
