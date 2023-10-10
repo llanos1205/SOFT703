@@ -43,7 +43,7 @@ public class SendMoneyController : Controller
         return View(viewModel);
     }
 
-    public Exchange ExchangeFound(int senderCountryId, int receiverCountryId, int agentId)
+    public Exchange ExchangeFound(string senderCountryId, string receiverCountryId, string agentId)
     {
         Exchange exchangeFound = _context.Exchange.FirstOrDefault(x =>
             x.SenderCountryId == senderCountryId &&
@@ -53,7 +53,7 @@ public class SendMoneyController : Controller
     }
 
     [HttpGet]
-    public IActionResult GetExchangeRate(int senderCountryId, int receiverCountryId, int agentId)
+    public IActionResult GetExchangeRate(string senderCountryId, string receiverCountryId, string agentId)
     {
         double exchangeRate = this.ExchangeFound(senderCountryId, receiverCountryId, agentId)?.Rate ?? 1.00;
         return Json(new { exchangeRate });

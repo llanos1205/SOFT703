@@ -1,8 +1,10 @@
-﻿namespace SOFT703.Models;
+﻿using SOFT703.Services.Contracts;
 
-public class Agent
+namespace SOFT703.Models;
+
+public class Agent:IEntity
 {
-    public int Id { get; set; }
+    public string? Id { get; set; }
     public string? Name { get; set; }
     public string? Address { get; set; }
     public List<Exchange> Exchanges { get; set; }

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SOFT703.Models;
 
 namespace SOFT703.Data;
@@ -21,7 +23,6 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, string>
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Configure the many-to-many relationship
         modelBuilder.Entity<ProductXTrolley>()
             .HasKey(pt => new { pt.ProductId, pt.TrolleyId });
 
@@ -43,27 +44,42 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, string>
             .HasMany(c => c.SenderExchanges)
             .WithOne(e => e.SenderCountry)
             .HasForeignKey(e => e.SenderCountryId)
-            .OnDelete(DeleteBehavior.Restrict); // Choose the appropriate delete behavior
+            .OnDelete(DeleteBehavior.Restrict);
 
         modelBuilder.Entity<Exchange>()
             .HasOne(e => e.SenderCountry)
             .WithMany(c => c.SenderExchanges)
             .HasForeignKey(e => e.SenderCountryId)
-            .OnDelete(DeleteBehavior.Restrict); // Choose the appropriate delete behavior
+            .OnDelete(DeleteBehavior.Restrict); 
 
-        // Configure many-to-many relationship between Country and Exchange for ReceiverExchanges
         modelBuilder.Entity<Country>()
             .HasMany(c => c.ReceiverExchanges)
             .WithOne(e => e.ReceiverCountry)
             .HasForeignKey(e => e.ReceiverCountryId)
-            .OnDelete(DeleteBehavior.Restrict); // Choose the appropriate delete behavior
+            .OnDelete(DeleteBehavior.Restrict);
 
         modelBuilder.Entity<Exchange>()
             .HasOne(e => e.ReceiverCountry)
             .WithMany(c => c.ReceiverExchanges)
             .HasForeignKey(e => e.ReceiverCountryId)
-            .OnDelete(DeleteBehavior.Restrict); // Choose the appropriate delete behavior
-
+            .OnDelete(DeleteBehavior.Restrict); 
+    
+        UpdateKeysConfig(modelBuilder);
         base.OnModelCreating(modelBuilder);
+    }
+
+    protected void UpdateKeysConfig(ModelBuilder modelBuilder)
+    {
+        foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+        {
+            var properties = entityType.GetProperties();
+            foreach (var property in properties)
+            {
+                if (property.ClrType == typeof(string) && property.Name == "Id")
+                {
+                    property.ValueGenerated = ValueGenerated.OnAdd;
+                }
+            }
+        }
     }
 }

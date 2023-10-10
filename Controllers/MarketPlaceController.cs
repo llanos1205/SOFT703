@@ -39,6 +39,10 @@ public class MarketPlaceController : Controller
 
         var products = _context.Product.ToList();
 
+        if (currentTrolley.ProductXTrolleys == null)
+        {
+            currentTrolley.ProductXTrolleys = new List<ProductXTrolley>();
+        }
         var mpViewModel = new MarketPlaceViewModel
         {
             Total = currentTrolley.Total,
@@ -50,7 +54,7 @@ public class MarketPlaceController : Controller
     }
 
 
-    public IActionResult AddToTrolley(int productId)
+    public IActionResult AddToTrolley(string productId)
     {
         var product = _context.Product.Find(productId);
         if (product != null)
@@ -88,7 +92,7 @@ public class MarketPlaceController : Controller
         return RedirectToAction("MarketPlace"); 
     }
 
-    public IActionResult RemoveItem(int id)
+    public IActionResult RemoveItem(string id)
     {
         var product = _context.Product.Find(id);
         if (product != null)
@@ -125,7 +129,7 @@ public class MarketPlaceController : Controller
 
     }
 
-    public IActionResult CheckOut(int trolleyid)
+    public IActionResult CheckOut(string trolleyid)
     {
         var trolley = _context.Trolley.Find(trolleyid);
         trolley.IsCurrent = false;

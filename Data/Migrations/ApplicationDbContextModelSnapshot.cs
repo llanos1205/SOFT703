@@ -130,11 +130,8 @@ namespace SOFT703.Data.Migrations
 
             modelBuilder.Entity("SOFT703.Models.Agent", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
@@ -149,11 +146,8 @@ namespace SOFT703.Data.Migrations
 
             modelBuilder.Entity("SOFT703.Models.Country", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -165,23 +159,23 @@ namespace SOFT703.Data.Migrations
 
             modelBuilder.Entity("SOFT703.Models.Exchange", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AgentId")
-                        .HasColumnType("int");
+                    b.Property<string>("AgentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<double>("Rate")
                         .HasColumnType("float");
 
-                    b.Property<int>("ReceiverCountryId")
-                        .HasColumnType("int");
+                    b.Property<string>("ReceiverCountryId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("SenderCountryId")
-                        .HasColumnType("int");
+                    b.Property<string>("SenderCountryId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -196,11 +190,8 @@ namespace SOFT703.Data.Migrations
 
             modelBuilder.Entity("SOFT703.Models.Product", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -221,11 +212,11 @@ namespace SOFT703.Data.Migrations
 
             modelBuilder.Entity("SOFT703.Models.ProductXTrolley", b =>
                 {
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<string>("ProductId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("TrolleyId")
-                        .HasColumnType("int");
+                    b.Property<string>("TrolleyId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -266,11 +257,8 @@ namespace SOFT703.Data.Migrations
 
             modelBuilder.Entity("SOFT703.Models.Transaction", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<double>("Amount")
                         .HasColumnType("float");
@@ -278,8 +266,9 @@ namespace SOFT703.Data.Migrations
                     b.Property<double>("AmountConverted")
                         .HasColumnType("float");
 
-                    b.Property<int>("ExchangeId")
-                        .HasColumnType("int");
+                    b.Property<string>("ExchangeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("TransactionDate")
                         .HasColumnType("datetime2");
@@ -299,11 +288,8 @@ namespace SOFT703.Data.Migrations
 
             modelBuilder.Entity("SOFT703.Models.Trolley", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsCurrent")
                         .HasColumnType("bit");
