@@ -22,14 +22,12 @@ public class LoginViewModel : ILoginViewModel
 
 
     private readonly IUserService _userService;
-    private readonly ITrolleyService _trolleyService;
-    private readonly ITransactionService _transactionService;
 
-    public LoginViewModel(IUserService userService, ITrolleyService trolleyService, ITransactionService transactionService)
+
+    public LoginViewModel(IUserService userService)
     {
         _userService = userService;
-        _trolleyService = trolleyService;
-        _transactionService = transactionService;
+   
     }
 
     public LoginViewModel()
@@ -62,6 +60,21 @@ public class LoginViewModel : ILoginViewModel
 
     }
 
+    public async Task AddUser(string role)
+    {
+        var user = new User()
+        {
+            Email = this.Email,
+            UserName = this.Email,
+            FirstName = this.FirstName,
+            LastName = this.LastName,
+            PhoneNumber = this.PhoneNumber,
+            EmailConfirmed = true
+            
+        };
+        await _userService.AddDefaultAsync(user, this.Password);
+        await _userService.SetRole(user.Email, "staff");
+    }
 
 
     public Task DeleteAsync(string id)

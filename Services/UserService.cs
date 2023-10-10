@@ -11,7 +11,8 @@ public class UserService : GenericBaseService<User>, IUserService
     private readonly UserManager<User> _userManager;
     private readonly SignInManager<User> _signInManager;
 
-    public UserService(UserManager<User> userManager, SignInManager<User> signInManager,ApplicationDbContext context) : base(context)
+    public UserService(UserManager<User> userManager, SignInManager<User> signInManager,
+        ApplicationDbContext context) : base(context)
     {
         _userManager = userManager;
         _signInManager = signInManager;
@@ -25,10 +26,11 @@ public class UserService : GenericBaseService<User>, IUserService
             await _signInManager.SignInAsync(user, isPersistent: false);
             return true;
         }
+
         return false;
     }
 
-    public async Task<bool> SignIn(User user,string Password)
+    public async Task<bool> SignIn(User user, string Password)
     {
         var result = await _userManager.CreateAsync(user, Password);
         if (result.Succeeded)
@@ -36,6 +38,7 @@ public class UserService : GenericBaseService<User>, IUserService
             await _signInManager.SignInAsync(user, isPersistent: false);
             return true;
         }
+
         return false;
     }
 
@@ -51,13 +54,35 @@ public class UserService : GenericBaseService<User>, IUserService
 
     public Task<User?> GetUserTrolleyTransaction(string? id)
     {
-        //if id is null find all transactions related to the calling user, if not null find all the transactions to the user with that id
-        return id == null ? _context.Users.Include(x => x.Transactions)
-            .Include(x => x.Trolleys)
-            .FirstOrDefaultAsync(x => x.Id == GetUserId()) : _context.Users.Include(x => x.Transactions)
-            .Include(x => x.Trolleys)
-            .FirstOrDefaultAsync(x => x.Id == id);
+        //if id is null find all transactions related to the calling user, if not null find all the transactions to the user with that id also exlcude any trolley with the variable isCurrent that is true
 
-        
+        return id == null
+            ? _context.Users.Include(x => x.Transactions)
+                .ThenInclude(x => x.Exchange)
+                .ThenInclude(x => x.SenderCountry)
+                .Include(x => x.Transactions)
+                .ThenInclude(x => x.Exchange)
+                .ThenInclude(x => x.ReceiverCountry)
+                .Include(x => x.Trolleys.Where(t => !t.IsCurrent))
+                .FirstOrDefaultAsync(x => x.Id == GetUserId())
+            : _context.Users.Include(x => x.Transactions)
+                .ThenInclude(x => x.Exchange)
+                .ThenInclude(x => x.SenderCountry)
+                .Include(x => x.Transactions)
+                .ThenInclude(x => x.Exchange)
+                .ThenInclude(x => x.ReceiverCountry)
+                .Include(x => x.Trolleys.Where(t => !t.IsCurrent))
+                .FirstOrDefaultAsync(x => x.Id == id);
+    }
+
+    public async Task SetRole(string email, string role)
+    {
+        var user = await _userManager.FindByEmailAsync(email);
+        await _userManager.AddToRoleAsync(user, role);
+    }
+
+    public async Task AddDefaultAsync(User user, string? password)
+    {
+        var result = await _userManager.CreateAsync(user, password);
     }
 }

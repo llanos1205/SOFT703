@@ -12,18 +12,11 @@ namespace SOFT703.Controllers;
 
 public class LoginController : Controller
 {
-    private readonly UserManager<User> _userManager;
-    private readonly SignInManager<User> _signInManager;
-    private readonly ApplicationDbContext _context;
     private readonly ILoginViewModel _vm;
     private readonly IUserDetailViewModel  _userDetailViewModel;
 
-    public LoginController(ApplicationDbContext context, UserManager<User> userManager,
-        SignInManager<User> signInManager, ILoginViewModel vm, IUserDetailViewModel userDetailViewModel)
+    public LoginController( ILoginViewModel vm, IUserDetailViewModel userDetailViewModel)
     {
-        _userManager = userManager;
-        _signInManager = signInManager;
-        _context = context;
         _vm = vm;
         _userDetailViewModel = userDetailViewModel;
     }
@@ -96,12 +89,6 @@ public class LoginController : Controller
     public async Task<IActionResult> UserDetail(string userId)
     {
         await _userDetailViewModel.Detail(null);
-
-
-       
-         
-       
-
         return View("UserDetail", _userDetailViewModel);
     }
 }

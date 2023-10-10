@@ -11,6 +11,7 @@ public interface ILoginViewModel:IGenericViewModel<User>
     public  Task LogOut();
     public  Task<bool> SignIn();
 
- 
+    public Task AddUser(string role);
+
 
 }
