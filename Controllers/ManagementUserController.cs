@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using SOFT703.Data;
 using SOFT703.Models;
 using SOFT703.Models.ViewModels;
+using SOFT703.Models.ViewModels.Contracts;
 
 namespace SOFT703.Controllers;
 
@@ -14,11 +15,12 @@ public class ManagementUserController : Controller
 {
     private readonly UserManager<User> _userManager;
     private readonly ApplicationDbContext _context;
-
-    public ManagementUserController(ApplicationDbContext context,UserManager<User> userManager)
+    private readonly ILoginViewModel _loginViewModel;
+    public ManagementUserController(ILoginViewModel vm,ApplicationDbContext context,UserManager<User> userManager)
     {
         _context = context;
         _userManager = userManager;
+        _loginViewModel = vm;
     }
 
     // GET
@@ -47,14 +49,14 @@ public class ManagementUserController : Controller
             .ToList();
 
 
-        var viewModel = new UserDetailViewModel
-        {
-            User = user,
-            Transactions = transactions,
-            Trolleys = _context.Trolley.Where(t => t.UserId == id).ToList()
-        };
+        // var viewModel = new UserDetailViewModel
+        // {
+        //     User = user,
+        //     Transactions = transactions,
+        //     Trolleys = _context.Trolley.Where(t => t.UserId == id).ToList()
+        // };
 
-        return View(viewModel);
+        return View(null);
     }
  
     public IActionResult Edit(string id)
@@ -95,8 +97,8 @@ public class ManagementUserController : Controller
  
     public IActionResult Add()
     {
-        var vm = new LoginViewModel();
-        return View(vm);
+        
+        return View(_loginViewModel);
     }
     [HttpPost]
     [Authorize]

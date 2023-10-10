@@ -7,7 +7,7 @@ namespace SOFT703.Services;
 public class GenericBaseService<T> : IBaseService<T> where T : class, IEntity
 {
     //implementation of the IBaseService for the Product model
-    private readonly ApplicationDbContext _context;
+    protected readonly ApplicationDbContext _context;
 
     public GenericBaseService(ApplicationDbContext context)
     {

@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using SOFT703.Data;
 using SOFT703.Models;
 using SOFT703.Models.ViewModels;
+using SOFT703.Models.ViewModels.Contracts;
+using SOFT703.Services.Contracts;
 
 namespace SOFT703.Controllers;
 
@@ -13,14 +15,17 @@ public class LoginController : Controller
     private readonly UserManager<User> _userManager;
     private readonly SignInManager<User> _signInManager;
     private readonly ApplicationDbContext _context;
-
+    private readonly ILoginViewModel _vm;
+    private readonly IUserDetailViewModel  _userDetailViewModel;
 
     public LoginController(ApplicationDbContext context, UserManager<User> userManager,
-        SignInManager<User> signInManager)
+        SignInManager<User> signInManager, ILoginViewModel vm, IUserDetailViewModel userDetailViewModel)
     {
         _userManager = userManager;
         _signInManager = signInManager;
         _context = context;
+        _vm = vm;
+        _userDetailViewModel = userDetailViewModel;
     }
 
     [HttpGet]
@@ -37,11 +42,10 @@ public class LoginController : Controller
     {
         if (ModelState.IsValid)
         {
-            var user = await _userManager.FindByEmailAsync(model.Email);
-
-            if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
+            _vm.Email = model.Email;
+            _vm.Password = model.Password;
+            if (await _vm.Login())
             {
-                await _signInManager.SignInAsync(user, isPersistent: false);
                 return RedirectToAction("Index", "Home");
             }
 
@@ -63,64 +67,41 @@ public class LoginController : Controller
     {
         if (ModelState.IsValid)
         {
-            var user = new User
+            _vm.Password = model.Password;
+            _vm.Email = model.Email;
+            _vm.FirstName = model.FirstName;
+            _vm.LastName = model.LastName;
+            _vm.PhoneNumber = model.PhoneNumber;
+            if (await _vm.SignIn())
             {
-                Email = model.Email,
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                PhoneNumber = model.PhoneNumber,
-                EmailConfirmed = true,
-                UserName = model.Email
-            };
-            var result = await _userManager.CreateAsync(user, model.Password);
-            if (result.Succeeded)
-            {
-                await _signInManager.SignInAsync(user, isPersistent: false);
                 return RedirectToAction("Index", "Home");
             }
+
             else
             {
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
+                ModelState.AddModelError(string.Empty, "Invalid email or password. Please try again.");
             }
         }
 
         return View("SignIn", model);
     }
 
-    public IActionResult LogOut()
+    public async Task<IActionResult> LogOut()
     {
-        _signInManager.SignOutAsync();
+        await _vm.LogOut(); 
         return RedirectToAction("Index", "Home");
     }
 
 
-    public IActionResult UserDetail(string userId)
+    public async Task<IActionResult> UserDetail(string userId)
     {
-        var user = _context.Users.FirstOrDefault(u => u.Id == userId);
-        if (user == null)
-        {
-            return NotFound();
-        }
-
-        var transactions = _context.Transaction
-            .Where(t => t.UserId == userId)
-            .Include(t => t.Exchange)
-            .ThenInclude(e => e.SenderCountry) // Include sender country
-            .Include(t => t.Exchange)
-            .ThenInclude(e => e.ReceiverCountry) // Include receiver country
-            .ToList();
+        await _userDetailViewModel.Detail(null);
 
 
-        var viewModel = new UserDetailViewModel
-        {
-            User = user,
-            Transactions = transactions,
-            Trolleys = _context.Trolley.Where(t => t.UserId == userId).ToList()
-        };
+       
+         
+       
 
-        return View("UserDetail", viewModel);
+        return View("UserDetail", _userDetailViewModel);
     }
 }
