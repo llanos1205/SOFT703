@@ -1,9 +1,24 @@
 ﻿
 
+INSERT INTO Agent (Id, Name, Address) VALUES (NEWID(), 'Apple','21 OPOIA ROAD');
+INSERT INTO Agent (Id, Name, Address) VALUES (NEWID(), 'Orange','28 LINWOOD AVE');
+INSERT INTO Agent (Id, Name, Address) VALUES (NEWID(), 'Sea Cucumber', '6 FATHER MELGAR');
+INSERT INTO Agent (Id, Name, Address) VALUES (NEWID(), 'Pineaple','1/1A BURWOOD ROAD');
+
+INSERT INTO Country (Id, Name) VALUES (NEWID(), 'Argentina');
+INSERT INTO Country (Id, Name) VALUES (NEWID(), 'Bolivia');
+INSERT INTO Country (Id, Name) VALUES (NEWID(), 'Brazil');
+INSERT INTO Country (Id, Name) VALUES (NEWID(), 'Chile');
+INSERT INTO Country (Id, Name) VALUES (NEWID(), 'Colombia');
+INSERT INTO Country (Id, Name) VALUES (NEWID(), 'Costa Rica');
+INSERT INTO Country (Id, Name) VALUES (NEWID(), 'Cuba');
+INSERT INTO Country (Id, Name) VALUES (NEWID(), 'Ecuador');
+
+
 DECLARE @MinRate DECIMAL(18, 6) = 1;
 DECLARE @MaxRate DECIMAL(18, 6) = 100;
 
-DECLARE @AgentId INT;
+DECLARE @AgentId nvarchar(450);
 
 DECLARE cursor_agents CURSOR FOR
     SELECT Id FROM Agent;
@@ -14,9 +29,8 @@ FETCH NEXT FROM cursor_agents INTO @AgentId;
 
 WHILE @@FETCH_STATUS = 0
     BEGIN
-        -- Loop through all combinations of Latin American countries
-        DECLARE @SenderId INT;
-        DECLARE @ReceiverId INT;
+        DECLARE @SenderId nvarchar(450);
+        DECLARE @ReceiverId nvarchar(450);
 
         DECLARE cursor_countries CURSOR FOR
             SELECT c1.Id AS SenderId, c2.Id AS ReceiverId
@@ -29,17 +43,14 @@ WHILE @@FETCH_STATUS = 0
 
         WHILE @@FETCH_STATUS = 0
             BEGIN
-                -- Generate a random rate within the defined range
                 DECLARE @RandomRate DECIMAL(18, 6);
                 SET @RandomRate = RAND() * (@MaxRate - @MinRate) + @MinRate;
+                INSERT INTO Exchange (Id,SenderCountryId, ReceiverCountryId, Rate, AgentId)
+                VALUES (NEWID(),@SenderId, @ReceiverId, @RandomRate, @AgentId);
+              
 
-                -- Insert the exchange rate for the current agent
-                INSERT INTO Exchange (SenderCountryId, ReceiverCountryId, Rate, AgentId)
-                VALUES (@SenderId, @ReceiverId, @RandomRate, @AgentId);
-
-                -- Ensure that the rate in the opposite direction is reciprocal
-                INSERT INTO Exchange (SenderCountryId, ReceiverCountryId, Rate, AgentId)
-                VALUES (@ReceiverId, @SenderId, 1 / @RandomRate, @AgentId);
+                INSERT INTO Exchange (Id,SenderCountryId, ReceiverCountryId, Rate, AgentId)
+                VALUES (NEWID(),@ReceiverId, @SenderId, 1 / @RandomRate, @AgentId);
 
                 FETCH NEXT FROM cursor_countries INTO @SenderId, @ReceiverId;
             END;
@@ -53,26 +64,27 @@ WHILE @@FETCH_STATUS = 0
 CLOSE cursor_agents;
 DEALLOCATE cursor_agents;
            
--- Generate random data for the Products table
--- Generate random data for the Products table
-INSERT INTO Product (Name, Photo, Stock, Price)
+INSERT INTO Product (Id,Name, Photo, Stock, Price)
 SELECT
+    NEWID(),
     CONCAT('Product', CAST(ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS VARCHAR(10))),
     'https://example.com/path/to/image' + CAST(ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS VARCHAR(10)),
-    ROUND(RAND() * (50 - 10) + 10, 0), -- Random stock between 10 and 50
-    ROUND(RAND() * (30 - 5) + 5, 2) -- Random price between 5.00 and 30.00
+    ROUND(RAND() * (50 - 10) + 10, 0), 
+    ROUND(RAND() * (30 - 5) + 5, 2) 
 FROM
     (SELECT ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS n) AS numbers;
 
 
+
+
 -- Create the 'admin' role
 INSERT INTO AspNetRoles (Id, [Name], [NormalizedName])
-VALUES ('8F8D7E0F-12F1-4C53-A1E3-9E5C53C96C00', 'admin', 'ADMINISTRAROR');
+VALUES (NEWID(), 'admin', 'ADMINISTRATOR');
 
 -- Create the 'staff' role
 INSERT INTO AspNetRoles (Id, [Name], [NormalizedName])
-VALUES ('F50A8B88-ACD3-496B-95A1-A82A6EB3E1F4', 'staff', 'STAFF');
+VALUES (NEWID(), 'staff', 'STAFF');
 
 -- Create the 'client' role
 INSERT INTO AspNetRoles (Id, [Name], [NormalizedName])
-VALUES ('4A7C9147-571F-46F1-92DB-8B74584E8478', 'client', 'CLIENT');
+VALUES (NEWID(), 'client', 'CLIENT');

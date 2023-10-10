@@ -3,87 +3,75 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SOFT703.Data;
 using SOFT703.Models.ViewModels;
+using SOFT703.Models.ViewModels.Contracts;
 
 namespace SOFT703.Controllers;
 
 public class ManagementProductController : Controller
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IManagementProductViewModel _vm;
 
-    public ManagementProductController(ApplicationDbContext context)
+    public ManagementProductController(IManagementProductViewModel vm)
     {
-        _context = context;
+        _vm = vm;
     }
+
     // GET
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        var vm = new ManagementProductViewModel();
-        vm.Products = _context.Product.ToList();
-        return View(vm);
+        await _vm.GetAllAsync();
+        return View(_vm);
     }
+
     [HttpPost]
     [Authorize]
     [ValidateAntiForgeryToken]
-
-    public IActionResult Edit(int id,ManagementProductViewModel vm)
+    public async Task<IActionResult> Edit(string id, ManagementProductViewModel vm)
     {
         if (id != vm.Product.Id)
         {
             return NotFound(); // Product not found
         }
+
         if (ModelState.IsValid)
         {
             try
             {
-                var existingProduct = _context.Product.FirstOrDefault(p => p.Id == id);
-                if (existingProduct == null)
-                {
-                    return NotFound(); 
-                }
-                existingProduct.Name = vm.Product.Name;
-                existingProduct.Photo = vm.Product.Photo;
-                existingProduct.Price = vm.Product.Price;
-                existingProduct.Stock = vm.Product.Stock;
-                _context.SaveChanges();
-                return RedirectToAction("Index"); 
+                await _vm.UpdateAsync(id, vm.Product);
+                return RedirectToAction("Index");
             }
             catch (DbUpdateConcurrencyException)
             {
                 ModelState.AddModelError(string.Empty, "Concurrency error occurred.");
             }
         }
-        return View(vm); 
-    }
-    
-    public IActionResult Edit(int id)
-    {
-        var vm = new ManagementProductViewModel();
-        vm.Product = _context.Product.FirstOrDefault(X => X.Id == id);
+
         return View(vm);
     }
+
+    public async Task<IActionResult> Edit(string id)
+    {
+        await _vm.GetByIdAsync(id);
+        return View(_vm);
+    }
+
     public IActionResult Add()
     {
-        var vm = new ManagementProductViewModel();
-        return View(vm);
+        return View(_vm);
     }
-    
+
     [HttpPost]
     [Authorize]
     [ValidateAntiForgeryToken]
-    public IActionResult Add(ManagementProductViewModel vm)
+    public async Task<IActionResult> Add(ManagementProductViewModel vm)
     {
-        _context.Product.Add(vm.Product);
-        _context.SaveChanges();
+        await _vm.AddAsync(vm.Product);
         return RedirectToAction("Index");
     }
 
-    public IActionResult Delete(int id)
+    public async Task<IActionResult> Delete(string id)
     {
-        var product = _context.Product.FirstOrDefault(x => x.Id == id);
-        _context.Product.Remove(product);
-        _context.SaveChanges();
+        await _vm.DeleteAsync(id);
         return RedirectToAction("Index");
     }
-
-    
 }

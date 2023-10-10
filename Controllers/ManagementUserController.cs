@@ -7,143 +7,90 @@ using Microsoft.EntityFrameworkCore;
 using SOFT703.Data;
 using SOFT703.Models;
 using SOFT703.Models.ViewModels;
+using SOFT703.Models.ViewModels.Contracts;
 
 namespace SOFT703.Controllers;
 
 public class ManagementUserController : Controller
 {
-    private readonly UserManager<User> _userManager;
-    private readonly ApplicationDbContext _context;
+    private readonly IUserDetailViewModel _userDetailViewModel;
+    private readonly IManagementUserViewModel _managementUserViewModel;
+    private readonly ILoginViewModel _loginViewModel;
 
-    public ManagementUserController(ApplicationDbContext context,UserManager<User> userManager)
+    public ManagementUserController(IUserDetailViewModel vm, IManagementUserViewModel managementUserViewModel,
+        ILoginViewModel loginViewModel)
     {
-        _context = context;
-        _userManager = userManager;
+        _managementUserViewModel = managementUserViewModel;
+        _userDetailViewModel = vm;
+        _loginViewModel = loginViewModel;
     }
 
     // GET
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        var vm = new ManagementUserViewModel();
-        vm.Users = _context.Users.ToList();
-        vm.Users = vm.Users.Where(u => u.Id != User.FindFirst(ClaimTypes.NameIdentifier)?.Value).ToList();
-        return View(vm);
+        await _managementUserViewModel.GetAllAsync();
+        return View(_managementUserViewModel);
     }
 
-    public IActionResult Detail(string id)
+    public async Task<IActionResult> Detail(string id)
     {
-        var user = _context.Users.FirstOrDefault(u => u.Id == id);
-        if (user == null)
-        {
-            return NotFound();
-        }
-
-        var transactions = _context.Transaction
-            .Where(t => t.UserId == id)
-            .Include(t => t.Exchange)
-            .ThenInclude(e => e.SenderCountry) // Include sender country
-            .Include(t => t.Exchange)
-            .ThenInclude(e => e.ReceiverCountry) // Include receiver country
-            .ToList();
-
-
-        var viewModel = new UserDetailViewModel
-        {
-            User = user,
-            Transactions = transactions,
-            Trolleys = _context.Trolley.Where(t => t.UserId == id).ToList()
-        };
-
-        return View(viewModel);
+        await _userDetailViewModel.Detail(id);
+        return View(_userDetailViewModel);
     }
- 
-    public IActionResult Edit(string id)
+
+    public async Task<IActionResult> Edit(string id)
     {
-        var vm = new ManagementUserViewModel();
-        vm.User = _context.Users.FirstOrDefault(u => u.Id == id);
-        return View(vm);
+        await _managementUserViewModel.GetByIdAsync(id);
+        return View(_managementUserViewModel);
     }
-    
-    
+
+
     [HttpPost]
     [Authorize]
-    
     [ValidateAntiForgeryToken]
-    public IActionResult Edit(ManagementUserViewModel vm)
+    public async Task<IActionResult> Edit(ManagementUserViewModel vm)
     {
-        if (!User.IsInRole("Staff"))
+        if (!User.IsInRole("staff"))
         {
             ModelState.AddModelError(string.Empty, "You are not authorized to perform this action");
             return View(vm);
         }
-        var user= _context.Users.FirstOrDefault(u => u.Id == vm.User.Id);
-        if (user == null)
-        {
-            return NotFound();
-        }
-        else
-        {
-            user.FirstName = vm.User.LastName;
-            user.FirstName = vm.User.FirstName;
-            user.PhoneNumber = vm.User.PhoneNumber;
-            user. Email = vm.User.Email;
-            _context.SaveChanges();
-        }
 
+
+        _managementUserViewModel.User = new User()
+        {
+            Email = vm.User.Email,
+            FirstName = vm.User.FirstName,
+            LastName = vm.User.LastName,
+            PhoneNumber = vm.User.PhoneNumber,
+        };
+        await _managementUserViewModel.UpdateAsync(vm.User.Id, _managementUserViewModel.User);
         return RedirectToAction("Index");
     }
- 
+
     public IActionResult Add()
     {
-        var vm = new LoginViewModel();
-        return View(vm);
+        return View(_loginViewModel);
     }
+
     [HttpPost]
     [Authorize]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Add(LoginViewModel vm)
     {
-         
-        var user = new User
-        {
-            FirstName = vm.FirstName,
-            LastName = vm.LastName,
-            Email = vm.Email,
-            PhoneNumber = vm.PhoneNumber,
-            UserName = vm.Email
-        };
-        var defaultPass= "Password1!";
-        var result= await _userManager.CreateAsync(user, defaultPass);
-        if (result.Succeeded)
-        {
-            return RedirectToAction("Index");
-        }
-        else
-        {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError(string.Empty, error.Description);
-            }
-        }
-
-        return RedirectToAction("Add");
+        //copy the parameters in the vm parameter to the parameters in the _loginviewmodel
+        _loginViewModel.Email = vm.Email;
+        _loginViewModel.FirstName = vm.FirstName;
+        _loginViewModel.LastName = vm.LastName;
+        _loginViewModel.PhoneNumber = vm.PhoneNumber;
+        _loginViewModel.Password = "Password1!";
+        await _loginViewModel.AddUser("client");
+        return RedirectToAction("Index");
     }
-    public IActionResult Delete(string id)
+
+    public async Task<IActionResult> Delete(string id)
     {
-        var user = _context.Users.FirstOrDefault(u => u.Id == id);
-        if (user == null)
-        {
-            return NotFound();
-        }
-        else if (user.Id == User.FindFirst(ClaimTypes.NameIdentifier)?.Value)
-        {
-            ModelState.AddModelError(string.Empty, "Cant delete yourself");
-        }
-        else
-        {
-            _context.Users.Remove(user);
-            _context.SaveChanges();
-        }
+        await _managementUserViewModel.DeleteAsync(id);
 
         return RedirectToAction("Index");
     }

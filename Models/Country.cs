@@ -1,8 +1,10 @@
-﻿namespace SOFT703.Models;
+﻿using SOFT703.Services.Contracts;
 
-public class Country
+namespace SOFT703.Models;
+
+public class Country:IEntity
 {
-    public int Id { get; set; }
+    public string? Id { get; set; }
     public string? Name { get; set; }
     public List<Exchange> SenderExchanges { get; set; } 
     public List<Exchange> ReceiverExchanges { get; set; } 

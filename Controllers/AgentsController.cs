@@ -1,22 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SOFT703.Data;
 using SOFT703.Models.ViewModels;
+using SOFT703.Models.ViewModels.Contracts;
 
 namespace SOFT703.Controllers;
 
 public class AgentsController : Controller
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IAgentsViewModel _vm;
 
-    public AgentsController(ApplicationDbContext context)
+    public AgentsController(IAgentsViewModel vm)
     {
-        _context = context;
+        _vm = vm;
     }
-    // GET
-    public IActionResult Index()
+
+    public async Task<IActionResult> Index()
     {
-        var vm = new AgentsViewModel();
-        vm.Agents = _context.Agent.ToList();
-        return View(vm);
+        await _vm.GetAllAsync();
+        return View(_vm);
     }
 }

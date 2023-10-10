@@ -1,8 +1,10 @@
-﻿namespace SOFT703.Models;
+﻿using SOFT703.Services.Contracts;
 
-public class Product
+namespace SOFT703.Models;
+
+public class Product:IEntity
 {
-    public int Id { set; get; }
+    public string? Id { set; get; }
     public  string? Name { get; set; }
     public  string? Photo { get; set; }
     public  int Stock { get; set; }

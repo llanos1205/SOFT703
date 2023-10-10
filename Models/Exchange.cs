@@ -1,14 +1,16 @@
-﻿namespace SOFT703.Models;
+﻿using SOFT703.Services.Contracts;
 
-public class Exchange
+namespace SOFT703.Models;
+
+public class Exchange:IEntity
 {
-    public int Id { get; set; }
+    public string? Id { get; set; }
     public double Rate { get; set; }
-    public int AgentId { get; set; }
-    public Agent Agent { get; set; }
-    public int SenderCountryId { get; set; }
-    public Country SenderCountry { get; set; }
-    public int ReceiverCountryId { get; set; }
-    public Country ReceiverCountry { get; set; }
-    public List<Transaction> Transactions { get; set; }
+    public string? AgentId { get; set; }
+    public Agent? Agent { get; set; }
+    public string? SenderCountryId { get; set; }
+    public Country? SenderCountry { get; set; }
+    public string?ReceiverCountryId { get; set; }
+    public Country? ReceiverCountry { get; set; }
+    public List<Transaction>? Transactions { get; set; }
 }
