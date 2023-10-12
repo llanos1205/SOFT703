@@ -14,13 +14,16 @@ public class TrolleyService : GenericBaseService<Trolley>, ITrolleyService
 
     public async Task<Trolley?> GetLatest(string id)
     {
-        //find the latest trolley for the user if cant find it create it
-        var trolley = await _context.Trolley.FirstOrDefaultAsync(x => x.UserId == id && x.IsCurrent);
-        trolley = await RecalculateTotal(trolley.Id);
+        //find the latest trolley for the user including the products 
+        var trolley =await _context.Trolley.Include(x => x.ProductXTrolleys).ThenInclude(x => x.Product)
+            .FirstOrDefaultAsync(x => x.UserId == id && x.IsCurrent);
+         
         if (trolley == null)
-        {
-            return await AddAsync(new Trolley()
+        {   trolley = await AddAsync(new Trolley()
                 { UserId = id, IsCurrent = true, TransactionDate = DateTime.Now, Total = 0 });
+            trolley = await RecalculateTotal(trolley.Id);
+            trolley.ProductXTrolleys = new List<ProductXTrolley>();
+            return trolley;
         }
 
         return trolley;
