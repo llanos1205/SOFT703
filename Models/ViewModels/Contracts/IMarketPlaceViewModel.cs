@@ -11,4 +11,5 @@ public interface IMarketPlaceViewModel:IGenericViewModel<Trolley>
     public Task RemoveFromTrolley(string productId);
     public Task CheckOut(string trolleyId);
 
+    Task GetTrolley();
 }

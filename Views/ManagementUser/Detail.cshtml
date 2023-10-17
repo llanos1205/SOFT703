@@ -9,11 +9,21 @@
 
 <h2>User Information</h2>
 <div>
-    <p><strong>Username:</strong> @Model.User.UserName</p>
-    <p><strong>Email:</strong> @Model.User.Email</p>
-    <p><strong>Phone:</strong> @Model.User.PhoneNumber</p>
-    <p><strong>First Name:</strong> @Model.User.FirstName</p>
-    <p><strong>Last Name:</strong> @Model.User.LastName</p>
+    <p>
+        <strong>Username:</strong> @Model.User.UserName
+    </p>
+    <p>
+        <strong>Email:</strong> @Model.User.Email
+    </p>
+    <p>
+        <strong>Phone:</strong> @Model.User.PhoneNumber
+    </p>
+    <p>
+        <strong>First Name:</strong> @Model.User.FirstName
+    </p>
+    <p>
+        <strong>Last Name:</strong> @Model.User.LastName
+    </p>
 </div>
 
 <h2>User Transactions</h2>
@@ -55,6 +65,9 @@
         <tr>
             <td>@trolley.TransactionDate</td>
             <td>@trolley.Total</td>
+            <td>
+                <a href="@Url.Action("Detail", "Trolley", new { id = trolley.Id })" class="btn btn-primary">Detail</a>
+            </td>
         </tr>
     }
     </tbody>

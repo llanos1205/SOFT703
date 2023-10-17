@@ -59,6 +59,12 @@ public class MarketPlaceViewModel : IMarketPlaceViewModel
         await _trolleyService.CheckOut(trolleyId);
     }
 
+    public async Task GetTrolley()
+    {
+        CurrentTrolley = await _trolleyService.GetLatest(_userService.GetUserId());
+        
+    }
+
     public Task<Trolley> AddAsync(Trolley entity)
     {
         throw new NotImplementedException();

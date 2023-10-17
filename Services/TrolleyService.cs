@@ -12,14 +12,23 @@ public class TrolleyService : GenericBaseService<Trolley>, ITrolleyService
     {
     }
 
+    public async Task<Trolley?> GetExtendedTrolley(string trolleyId)
+    {
+        //based on the trolley id find the trolley with its products
+        return await _context.Trolley.Include(x => x.ProductXTrolleys).ThenInclude(x => x.Product)
+            .FirstOrDefaultAsync(x => x.Id == trolleyId);
+        
+    }
+
     public async Task<Trolley?> GetLatest(string id)
     {
         //find the latest trolley for the user including the products 
-        var trolley =await _context.Trolley.Include(x => x.ProductXTrolleys).ThenInclude(x => x.Product)
+        var trolley = await _context.Trolley.Include(x => x.ProductXTrolleys).ThenInclude(x => x.Product)
             .FirstOrDefaultAsync(x => x.UserId == id && x.IsCurrent);
-         
+
         if (trolley == null)
-        {   trolley = await AddAsync(new Trolley()
+        {
+            trolley = await AddAsync(new Trolley()
                 { UserId = id, IsCurrent = true, TransactionDate = DateTime.Now, Total = 0 });
             trolley = await RecalculateTotal(trolley.Id);
             trolley.ProductXTrolleys = new List<ProductXTrolley>();
@@ -59,10 +68,9 @@ public class TrolleyService : GenericBaseService<Trolley>, ITrolleyService
         }
 
         trolley.Total += product.Price;
-        var updatedTrolley =await UpdateAsync(trolley);
+        var updatedTrolley = await UpdateAsync(trolley);
         updatedTrolley = await RecalculateTotal(updatedTrolley.Id);
         return updatedTrolley;
-        
     }
 
     public async Task<Trolley> RemoveProduct(string id, string productId)
@@ -85,7 +93,7 @@ public class TrolleyService : GenericBaseService<Trolley>, ITrolleyService
         }
 
         trolley.Total -= product.Price;
-        var updatedTrolley =await UpdateAsync(trolley);
+        var updatedTrolley = await UpdateAsync(trolley);
         updatedTrolley = await RecalculateTotal(updatedTrolley.Id);
         return updatedTrolley;
     }
