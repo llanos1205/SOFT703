@@ -1,4 +1,4 @@
-﻿/****** Object:  Table [dbo].[__EFMigrationsHistory]    Script Date: 11/10/2023 10:29:54 pm ******/
+﻿/****** Object:  Table [dbo].[__EFMigrationsHistory]    Script Date: 17/10/2023 3:44:08 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -12,7 +12,7 @@ CREATE TABLE [dbo].[__EFMigrationsHistory](
                                                       )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Agent]    Script Date: 11/10/2023 10:29:55 pm ******/
+/****** Object:  Table [dbo].[Agent]    Script Date: 17/10/2023 3:44:09 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -27,7 +27,7 @@ CREATE TABLE [dbo].[Agent](
                                       )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[AspNetRoleClaims]    Script Date: 11/10/2023 10:29:55 pm ******/
+/****** Object:  Table [dbo].[AspNetRoleClaims]    Script Date: 17/10/2023 3:44:09 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -43,7 +43,7 @@ CREATE TABLE [dbo].[AspNetRoleClaims](
                                                  )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[AspNetRoles]    Script Date: 11/10/2023 10:29:55 pm ******/
+/****** Object:  Table [dbo].[AspNetRoles]    Script Date: 17/10/2023 3:44:09 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -59,7 +59,7 @@ CREATE TABLE [dbo].[AspNetRoles](
                                             )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[AspNetUserClaims]    Script Date: 11/10/2023 10:29:55 pm ******/
+/****** Object:  Table [dbo].[AspNetUserClaims]    Script Date: 17/10/2023 3:44:09 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -75,7 +75,7 @@ CREATE TABLE [dbo].[AspNetUserClaims](
                                                  )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[AspNetUserLogins]    Script Date: 11/10/2023 10:29:55 pm ******/
+/****** Object:  Table [dbo].[AspNetUserLogins]    Script Date: 17/10/2023 3:44:09 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -92,7 +92,7 @@ CREATE TABLE [dbo].[AspNetUserLogins](
                                                  )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[AspNetUserRoles]    Script Date: 11/10/2023 10:29:55 pm ******/
+/****** Object:  Table [dbo].[AspNetUserRoles]    Script Date: 17/10/2023 3:44:09 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -107,7 +107,7 @@ CREATE TABLE [dbo].[AspNetUserRoles](
                                                 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[AspNetUsers]    Script Date: 11/10/2023 10:29:55 pm ******/
+/****** Object:  Table [dbo].[AspNetUsers]    Script Date: 17/10/2023 3:44:09 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -137,7 +137,7 @@ CREATE TABLE [dbo].[AspNetUsers](
                                             )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[AspNetUserTokens]    Script Date: 11/10/2023 10:29:55 pm ******/
+/****** Object:  Table [dbo].[AspNetUserTokens]    Script Date: 17/10/2023 3:44:09 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -155,7 +155,7 @@ CREATE TABLE [dbo].[AspNetUserTokens](
                                                  )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Country]    Script Date: 11/10/2023 10:29:55 pm ******/
+/****** Object:  Table [dbo].[Country]    Script Date: 17/10/2023 3:44:09 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -169,7 +169,7 @@ CREATE TABLE [dbo].[Country](
                                         )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Exchange]    Script Date: 11/10/2023 10:29:55 pm ******/
+/****** Object:  Table [dbo].[Exchange]    Script Date: 17/10/2023 3:44:09 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -186,7 +186,7 @@ CREATE TABLE [dbo].[Exchange](
                                          )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Product]    Script Date: 11/10/2023 10:29:55 pm ******/
+/****** Object:  Table [dbo].[Product]    Script Date: 17/10/2023 3:44:09 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -203,7 +203,7 @@ CREATE TABLE [dbo].[Product](
                                         )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ProductXTrolley]    Script Date: 11/10/2023 10:29:55 pm ******/
+/****** Object:  Table [dbo].[ProductXTrolley]    Script Date: 17/10/2023 3:44:09 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -219,7 +219,7 @@ CREATE TABLE [dbo].[ProductXTrolley](
                                                 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Transaction]    Script Date: 11/10/2023 10:29:55 pm ******/
+/****** Object:  Table [dbo].[Transaction]    Script Date: 17/10/2023 3:44:09 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -237,7 +237,7 @@ CREATE TABLE [dbo].[Transaction](
                                             )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Trolley]    Script Date: 11/10/2023 10:29:55 pm ******/
+/****** Object:  Table [dbo].[Trolley]    Script Date: 17/10/2023 3:44:09 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -265,15 +265,19 @@ INSERT [dbo].[AspNetRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) 
 INSERT [dbo].[AspNetRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (N'8F8D7E0F-12F1-4C53-A1E3-9E5C53C96C00', N'admin', N'ADMINISTRAROR', NULL)
 INSERT [dbo].[AspNetRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (N'F50A8B88-ACD3-496B-95A1-A82A6EB3E1F4', N'staff', N'STAFF', NULL)
 GO
+INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'0a61655a-c1f8-4dad-b390-4f90730066f9', N'F50A8B88-ACD3-496B-95A1-A82A6EB3E1F4')
 INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'0bedfa6d-eb0d-40ac-9e80-a4e6b5f33a8f', N'F50A8B88-ACD3-496B-95A1-A82A6EB3E1F4')
-INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'52923d97-d3a2-47db-b917-0285e75aad25', N'F50A8B88-ACD3-496B-95A1-A82A6EB3E1F4')
 INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'78aa9b86-3fd3-4dbd-a7c8-c276bbdd1892', N'F50A8B88-ACD3-496B-95A1-A82A6EB3E1F4')
+INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'87f5b4e8-9ead-4eb9-924e-18d7a85cfdf8', N'F50A8B88-ACD3-496B-95A1-A82A6EB3E1F4')
 GO
+INSERT [dbo].[AspNetUsers] ([Id], [FirstName], [LastName], [Phone], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'0a61655a-c1f8-4dad-b390-4f90730066f9', N'a new random name', N'a new random lastname', NULL, N'newuser@gmail.com', N'NEWUSER@GMAIL.COM', N'newuser@gmail.com', N'NEWUSER@GMAIL.COM', 1, N'AQAAAAIAAYagAAAAELpCMIkbh73RgHwDoTGWocwG5DymzCD+EiglfpWALHXYT0CMfjUgvfzanhsnCyI6tg==', N'CFHYXPTFJEBBLYKCWK63SJZAVJX4V2BG', N'a95af1a0-5a39-4363-80fd-047b6a47d221', N'14351564', 0, 0, NULL, 1, 0)
 INSERT [dbo].[AspNetUsers] ([Id], [FirstName], [LastName], [Phone], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'0bedfa6d-eb0d-40ac-9e80-a4e6b5f33a8f', N'admin', N'el admin', NULL, N'admin@gmail.com', N'ADMIN@GMAIL.COM', N'admin@gmail.com', N'ADMIN@GMAIL.COM', 1, N'AQAAAAIAAYagAAAAEBvU/Svz4LDrvLF5v4BlUwTo6/0H8sTZGF2U31yPzIcCDHxRo2RP6MJSXG7jFV2QoA==', N'UZX6OCKJ5MYZYYWDFMVE6PNRBTNBJODG', N'47465761-a5d9-4768-98fe-79a85ec17b4c', N'123456789', 0, 0, NULL, 1, 0)
-INSERT [dbo].[AspNetUsers] ([Id], [FirstName], [LastName], [Phone], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'52923d97-d3a2-47db-b917-0285e75aad25', N'sssd645ads654', N'asdd56', NULL, N'peterasdd@asd.com', N'PETERASDD@ASD.COM', N'peterasdd@asd.com', N'PETERASDD@ASD.COM', 1, N'AQAAAAIAAYagAAAAEKwnH0/ayx2vyzusYojIYbu1YnXHd3Z9PVDSpRYxJ6BPfxJAHtLktDH8WQn6F1ELHA==', N'QLV74P2RWN7PD7ZQNNQM3YV3TVZLEBAC', N'd788df37-2d37-4c93-9965-9084608e0118', N'6544562', 0, 0, NULL, 1, 0)
-INSERT [dbo].[AspNetUsers] ([Id], [FirstName], [LastName], [Phone], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'78aa9b86-3fd3-4dbd-a7c8-c276bbdd1892', N'ana', N'mendoza', NULL, N'xilasd654jalsd315@dasd.com', N'XILASD654JALSD315@DASD.COM', N'xilasd654jalsd315@dasd.com', N'XILASD654JALSD315@DASD.COM', 1, N'AQAAAAIAAYagAAAAEG9RE+E5BFaJUfCtSLr8q7dVghlCHuR9Y8WXN7AnsSsI7NsuySNt7CDpi+FL3eKp7g==', N'667VLF63EMTHV5MYGYB3WOTQJN223JZQ', N'7066b6f3-f1c9-4440-8785-ad52945dfde6', N'758462016598', 0, 0, NULL, 1, 0)
+INSERT [dbo].[AspNetUsers] ([Id], [FirstName], [LastName], [Phone], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'78aa9b86-3fd3-4dbd-a7c8-c276bbdd1892', N'ana maria', N'mendoza', NULL, N'xilasd654jalsd315@dasd.com', N'XILASD654JALSD315@DASD.COM', N'xilasd654jalsd315@dasd.com', N'XILASD654JALSD315@DASD.COM', 1, N'AQAAAAIAAYagAAAAEG9RE+E5BFaJUfCtSLr8q7dVghlCHuR9Y8WXN7AnsSsI7NsuySNt7CDpi+FL3eKp7g==', N'667VLF63EMTHV5MYGYB3WOTQJN223JZQ', N'7066b6f3-f1c9-4440-8785-ad52945dfde6', N'758462016598', 0, 0, NULL, 1, 0)
+INSERT [dbo].[AspNetUsers] ([Id], [FirstName], [LastName], [Phone], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'87f5b4e8-9ead-4eb9-924e-18d7a85cfdf8', N'temp v3 name', N'temp v3 name', NULL, N'tempv3@gmail.com', N'TEMPV3@GMAIL.COM', N'tempv3@gmail.com', N'TEMPV3@GMAIL.COM', 1, N'AQAAAAIAAYagAAAAEOm1lXAHy3PWykxvW/JCR6/TqP2aUiQfejbRVytte5136HTDGLU5VLjatPKF+ETLJQ==', N'6LNQLWGYXHHVUWZDW632A6CTEUVYH7F2', N'88b124dd-d737-4b45-9463-2b111196c8ee', N'446686464', 0, 0, NULL, 1, 0)
+INSERT [dbo].[AspNetUsers] ([Id], [FirstName], [LastName], [Phone], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'88217ee2-d621-4800-894c-74ad42a4818c', N'a name', N'a alst anme', NULL, N'test13142@gmail.com', N'TEST13142@GMAIL.COM', N'test13142@gmail.com', N'TEST13142@GMAIL.COM', 1, N'AQAAAAIAAYagAAAAEGQxmAGBZoolq+FS0x0bj7dF6TbvXEhSJTNU0fpqLz3kDhOVOBX37uO68QgGO8r+Ag==', N'GASEHRDZ6SPYOXJFEVHAM5IPIUDUTHMH', N'728e8725-82f6-4859-b0fc-09cde57a9b97', N'1321315641', 0, 0, NULL, 1, 0)
 INSERT [dbo].[AspNetUsers] ([Id], [FirstName], [LastName], [Phone], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'8fc03854-ef89-42ca-9136-4f493974bea9', N'Diego', N'Llanos', NULL, N'llanos1205@gmail.com', N'LLANOS1205@GMAIL.COM', N'llanos1205@gmail.com', N'LLANOS1205@GMAIL.COM', 1, N'AQAAAAIAAYagAAAAED/Zji/zzz02NsJy1Wil0JTvTX1XxwoIrKkbxvSMHsN8mch8I/CDxU2Ejxkpol/+1Q==', N'S2UYVHRBKJA4KAF4GXMP7WV5BLHJW67W', N'cd328459-310e-4816-b290-882600ef9051', N'0210761877', 0, 0, NULL, 1, 0)
-INSERT [dbo].[AspNetUsers] ([Id], [FirstName], [LastName], [Phone], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'f285ebad-a0e2-4d16-bf4c-5bc983a0d1f1', N'asdassddd', N'poasdkpob', NULL, N'temp@gmail.com', N'TEMP@GMAIL.COM', N'temp@gmail.com', N'TEMP@GMAIL.COM', 1, N'AQAAAAIAAYagAAAAEIMO/wJHrXDi2h28/ph3taP/RLDChSSKA2Or1iiOuUi7A1U5ooa40W9Nx0WBmJFXFw==', N'2TRLVWI3Y7RCG5M6G4TNMUF6KU2SF3EQ', N'a2583bb6-e6e3-4d16-9a30-6b7f87c2e4fb', N'0021364768', 0, 0, NULL, 1, 0)
+INSERT [dbo].[AspNetUsers] ([Id], [FirstName], [LastName], [Phone], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'cfa83baa-04cc-44df-99ac-8a66f368f9e2', N'a fake tester', N'sea cucumber', NULL, N'ggggfgfgfgfgfgfg@gmail.com', N'GGGGFGFGFGFGFGFG@GMAIL.COM', N'ggggfgfgfgfgfgfg@gmail.com', N'GGGGFGFGFGFGFGFG@GMAIL.COM', 1, N'AQAAAAIAAYagAAAAECnqX2D56ipTsRPjKH6bTNk2GkB0VwJSXkUTO21YDFAIKMxeAdINpqkRY56sQdqGhQ==', N'5SGNCTQHAHVFEHINQZAN7ZJMYGURALAV', N'c6291e24-a099-492c-8f5e-ab1c3e30ff5f', N'46986764', 0, 0, NULL, 1, 0)
+INSERT [dbo].[AspNetUsers] ([Id], [FirstName], [LastName], [Phone], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'fd406987-1fbe-42fc-b571-28499537346f', N'user 1314', N'user 1314', NULL, N'dssflkjsflsdlkfj@gmail.com', N'DSSFLKJSFLSDLKFJ@GMAIL.COM', N'dssflkjsflsdlkfj@gmail.com', N'DSSFLKJSFLSDLKFJ@GMAIL.COM', 1, N'AQAAAAIAAYagAAAAEBSQu2Vj6zUCKXpVR6C8PsFTVKE3kbdmOQGf0jF6McS3wG8Y7ENVr1H3lDTDWSIBDA==', N'YGHJV7J4ECFYQSPQ2TTQ2XU2E2TR3PCF', N'ff0af858-d198-4745-8c01-ce1f0cfbeca3', N'465465654', 0, 0, NULL, 1, 0)
 GO
 INSERT [dbo].[Country] ([Id], [Name]) VALUES (N'1AD1A603-4EF0-4F2D-8E13-9086F3D53BEE', N'Cuba')
 INSERT [dbo].[Country] ([Id], [Name]) VALUES (N'2BA55356-42FD-4FD1-BB7D-49BBAC0C4C93', N'Brazil')
@@ -737,40 +741,59 @@ INSERT [dbo].[Exchange] ([Id], [Rate], [AgentId], [SenderCountryId], [ReceiverCo
 INSERT [dbo].[Exchange] ([Id], [Rate], [AgentId], [SenderCountryId], [ReceiverCountryId]) VALUES (N'FFD9E582-A3C8-4FA3-B48D-5E8FF76E8D2D', 10.180533, N'2F126F94-CEFF-400A-8B78-CDCFA3439FCE', N'9C6DF2EC-19D9-418E-9F60-F5C9466CD6BF', N'8FD8D112-2730-4777-A327-B3641BF59689')
 INSERT [dbo].[Exchange] ([Id], [Rate], [AgentId], [SenderCountryId], [ReceiverCountryId]) VALUES (N'FFF7AFEE-0F0B-4BFA-8BDD-1C6AF80A6012', 0.016270559092042926, N'01C13528-D7E0-4518-A162-F38247EAD265', N'8F3281B5-3DE2-46AC-87A0-FF034B0A9720', N'B4481931-C8C9-4FA8-B0CD-3BE029C32F7B')
 GO
-INSERT [dbo].[Product] ([Id], [Name], [Photo], [Stock], [Price]) VALUES (N'074A4AD4-9425-4251-B902-4C33560B1056', N'Product1', N'https://example.com/path/to/image1', 50, 6.13)
-INSERT [dbo].[Product] ([Id], [Name], [Photo], [Stock], [Price]) VALUES (N'28AB2D92-3FC6-4A71-9E72-8102D6DC28F5', N'Product2', N'https://example.com/path/to/image1', 36, 25.23)
-INSERT [dbo].[Product] ([Id], [Name], [Photo], [Stock], [Price]) VALUES (N'2FF1C44D-C2E6-4656-B786-A0DBF8164DAE', N'Product3', N'https://example.com/path/to/image1', 20, 29.22)
-INSERT [dbo].[Product] ([Id], [Name], [Photo], [Stock], [Price]) VALUES (N'384C3714-D516-42B7-A656-88CAB7E5CE9E', N'Product4', N'https://example.com/path/to/image1', 12, 21.81)
-INSERT [dbo].[Product] ([Id], [Name], [Photo], [Stock], [Price]) VALUES (N'389A4D2F-2A07-4CF4-B028-A891D224E3BB', N'Product5', N'https://example.com/path/to/image1', 26, 22.55)
-INSERT [dbo].[Product] ([Id], [Name], [Photo], [Stock], [Price]) VALUES (N'8D883CDB-321A-4CE6-B470-BA606A9CEA26', N'Product6', N'https://example.com/path/to/image1', 35, 28.07)
-INSERT [dbo].[Product] ([Id], [Name], [Photo], [Stock], [Price]) VALUES (N'8F184FF0-8F75-49F7-932B-A4AF910A2A26', N'Product7', N'https://example.com/path/to/image1', 21, 20.74)
-INSERT [dbo].[Product] ([Id], [Name], [Photo], [Stock], [Price]) VALUES (N'99D82096-FBE1-486C-9F3E-A1F5A8216225', N'Product8', N'https://example.com/path/to/image1', 28, 20.08)
-INSERT [dbo].[Product] ([Id], [Name], [Photo], [Stock], [Price]) VALUES (N'A1D0B914-A7B5-481A-B7F6-C4A7C1FADABD', N'Product9', N'https://example.com/path/to/image1', 21, 19.91)
-INSERT [dbo].[Product] ([Id], [Name], [Photo], [Stock], [Price]) VALUES (N'BE479712-737F-4703-9D33-FE6EA3428CC9', N'Product10', N'https://example.com/path/to/image1', 13, 7.66)
-INSERT [dbo].[Product] ([Id], [Name], [Photo], [Stock], [Price]) VALUES (N'C289B345-4A19-420B-8F17-05661C2ACDE7', N'Product11', N'https://example.com/path/to/image1', 32, 18.87)
-INSERT [dbo].[Product] ([Id], [Name], [Photo], [Stock], [Price]) VALUES (N'C5C6A86A-8600-47BF-8869-9E4C0DADB0A8', N'Product12', N'https://example.com/path/to/image1', 49, 15.19)
-INSERT [dbo].[Product] ([Id], [Name], [Photo], [Stock], [Price]) VALUES (N'E467AA71-E270-44B3-A15A-8C5CD31782E1', N'Product13', N'https://example.com/path/to/image1', 11, 15.49)
+INSERT [dbo].[Product] ([Id], [Name], [Photo], [Stock], [Price]) VALUES (N'074A4AD4-9425-4251-B902-4C33560B1056', N'Product1', N'https://pokemon-faction.com/cdn/shop/products/product-image-1804697401_1024x1024.jpg?v=1626812079', 50, 6.13)
+INSERT [dbo].[Product] ([Id], [Name], [Photo], [Stock], [Price]) VALUES (N'28AB2D92-3FC6-4A71-9E72-8102D6DC28F5', N'Product2', N'https://pokemon-faction.com/cdn/shop/products/product-image-1804715637_1024x1024.jpg?v=1626812080', 36, 25.23)
+INSERT [dbo].[Product] ([Id], [Name], [Photo], [Stock], [Price]) VALUES (N'384C3714-D516-42B7-A656-88CAB7E5CE9E', N'Product4', N'https://pokemon-faction.com/cdn/shop/products/product-image-1804697393_1024x1024.jpg?v=1626812075', 12, 21.81)
+INSERT [dbo].[Product] ([Id], [Name], [Photo], [Stock], [Price]) VALUES (N'389A4D2F-2A07-4CF4-B028-A891D224E3BB', N'Product5', N'https://pokemon-faction.com/cdn/shop/products/product-image-1714578094_1024x1024.jpg?v=1626812078', 26, 22.55)
+INSERT [dbo].[Product] ([Id], [Name], [Photo], [Stock], [Price]) VALUES (N'6c70933a-ba19-4342-a844-ab1610915ad1', N'a new product v1314125', N'https://pokemon-faction.com/cdn/shop/products/product-image-1714578097_1024x1024.jpg?v=1627213876', 10000, 12)
+INSERT [dbo].[Product] ([Id], [Name], [Photo], [Stock], [Price]) VALUES (N'8D883CDB-321A-4CE6-B470-BA606A9CEA26', N'Product6', N'https://pokemon-faction.com/cdn/shop/products/product-image-1804718336_1024x1024.jpg?v=1626812077', 35, 28.07)
+INSERT [dbo].[Product] ([Id], [Name], [Photo], [Stock], [Price]) VALUES (N'8F184FF0-8F75-49F7-932B-A4AF910A2A26', N'Product7', N'https://pokemon-faction.com/cdn/shop/products/peluche-pokemon-mimiqui-1_480x480_9bcb7c4f-b026-4f82-9963-8188bec52455_1024x1024.jpg?v=1629020328', 888, 20.74)
+INSERT [dbo].[Product] ([Id], [Name], [Photo], [Stock], [Price]) VALUES (N'99D82096-FBE1-486C-9F3E-A1F5A8216225', N'Product8', N'https://pokemon-faction.com/cdn/shop/products/product-image-1714578092_1024x1024.jpg?v=1626812080', 28, 20.08)
+INSERT [dbo].[Product] ([Id], [Name], [Photo], [Stock], [Price]) VALUES (N'A1D0B914-A7B5-481A-B7F6-C4A7C1FADABD', N'Product9', N'https://pokemon-faction.com/cdn/shop/products/product-image-1804715633_1024x1024.jpg?v=1627213674', 21, 19.91)
+INSERT [dbo].[Product] ([Id], [Name], [Photo], [Stock], [Price]) VALUES (N'BE479712-737F-4703-9D33-FE6EA3428CC9', N'Product10', N'https://pokemon-faction.com/cdn/shop/products/product-image-1804715638_1024x1024.jpg?v=1626812076', 13, 7.66)
+INSERT [dbo].[Product] ([Id], [Name], [Photo], [Stock], [Price]) VALUES (N'C289B345-4A19-420B-8F17-05661C2ACDE7', N'Product11', N'https://pokemon-faction.com/cdn/shop/files/Sa5e88dc6d4ca4984b1d6da5a2e1b3a0bH_1024x1024.jpg?v=1694095313', 32, 18.87)
+INSERT [dbo].[Product] ([Id], [Name], [Photo], [Stock], [Price]) VALUES (N'C5C6A86A-8600-47BF-8869-9E4C0DADB0A8', N'Product12', N'https://pokemon-faction.com/cdn/shop/products/product-image-1798511433_1024x1024.jpg?v=1626812105', 49, 15.19)
+INSERT [dbo].[Product] ([Id], [Name], [Photo], [Stock], [Price]) VALUES (N'c8adb3fe-7f0d-4713-953d-62d8fe0f999d', N'test product', N'https://pokemon-faction.com/cdn/shop/products/product-image-1804684771_1024x1024.jpg?v=1626812104', 20, 5554)
 GO
+INSERT [dbo].[ProductXTrolley] ([ProductId], [TrolleyId], [Quantity]) VALUES (N'074A4AD4-9425-4251-B902-4C33560B1056', N'10b645d1-dfa2-4233-b34e-751bf9c62da7', 1)
+INSERT [dbo].[ProductXTrolley] ([ProductId], [TrolleyId], [Quantity]) VALUES (N'074A4AD4-9425-4251-B902-4C33560B1056', N'11902c5a-6f75-4d0c-87b7-76d7712445f1', 3)
+INSERT [dbo].[ProductXTrolley] ([ProductId], [TrolleyId], [Quantity]) VALUES (N'074A4AD4-9425-4251-B902-4C33560B1056', N'3eae51f6-e767-4665-8542-cd383fbb8854', 1)
 INSERT [dbo].[ProductXTrolley] ([ProductId], [TrolleyId], [Quantity]) VALUES (N'074A4AD4-9425-4251-B902-4C33560B1056', N'6c3eb0c2-f61c-4051-b74e-85edb95d526f', 2)
-INSERT [dbo].[ProductXTrolley] ([ProductId], [TrolleyId], [Quantity]) VALUES (N'2FF1C44D-C2E6-4656-B786-A0DBF8164DAE', N'1bd4165b-2f6f-4c46-90ee-3e69f773f58f', 1)
-INSERT [dbo].[ProductXTrolley] ([ProductId], [TrolleyId], [Quantity]) VALUES (N'2FF1C44D-C2E6-4656-B786-A0DBF8164DAE', N'6c3eb0c2-f61c-4051-b74e-85edb95d526f', 1)
-INSERT [dbo].[ProductXTrolley] ([ProductId], [TrolleyId], [Quantity]) VALUES (N'389A4D2F-2A07-4CF4-B028-A891D224E3BB', N'1bd4165b-2f6f-4c46-90ee-3e69f773f58f', 1)
+INSERT [dbo].[ProductXTrolley] ([ProductId], [TrolleyId], [Quantity]) VALUES (N'28AB2D92-3FC6-4A71-9E72-8102D6DC28F5', N'3eae51f6-e767-4665-8542-cd383fbb8854', 3)
+INSERT [dbo].[ProductXTrolley] ([ProductId], [TrolleyId], [Quantity]) VALUES (N'384C3714-D516-42B7-A656-88CAB7E5CE9E', N'43bac100-b8b1-45fa-b917-d23a00a31c64', 1)
 INSERT [dbo].[ProductXTrolley] ([ProductId], [TrolleyId], [Quantity]) VALUES (N'389A4D2F-2A07-4CF4-B028-A891D224E3BB', N'44c5759a-3530-4f70-b87f-d4f33e8b5920', 1)
+INSERT [dbo].[ProductXTrolley] ([ProductId], [TrolleyId], [Quantity]) VALUES (N'8D883CDB-321A-4CE6-B470-BA606A9CEA26', N'43bac100-b8b1-45fa-b917-d23a00a31c64', 1)
 INSERT [dbo].[ProductXTrolley] ([ProductId], [TrolleyId], [Quantity]) VALUES (N'8D883CDB-321A-4CE6-B470-BA606A9CEA26', N'44c5759a-3530-4f70-b87f-d4f33e8b5920', 1)
 INSERT [dbo].[ProductXTrolley] ([ProductId], [TrolleyId], [Quantity]) VALUES (N'8D883CDB-321A-4CE6-B470-BA606A9CEA26', N'd6075852-46ce-415c-a6ea-49fec6a5290d', 1)
+INSERT [dbo].[ProductXTrolley] ([ProductId], [TrolleyId], [Quantity]) VALUES (N'8F184FF0-8F75-49F7-932B-A4AF910A2A26', N'11902c5a-6f75-4d0c-87b7-76d7712445f1', 3)
+INSERT [dbo].[ProductXTrolley] ([ProductId], [TrolleyId], [Quantity]) VALUES (N'99D82096-FBE1-486C-9F3E-A1F5A8216225', N'11902c5a-6f75-4d0c-87b7-76d7712445f1', 3)
+INSERT [dbo].[ProductXTrolley] ([ProductId], [TrolleyId], [Quantity]) VALUES (N'99D82096-FBE1-486C-9F3E-A1F5A8216225', N'390e0708-2616-4d7b-937b-20cd894f3c39', 2)
+INSERT [dbo].[ProductXTrolley] ([ProductId], [TrolleyId], [Quantity]) VALUES (N'99D82096-FBE1-486C-9F3E-A1F5A8216225', N'3eae51f6-e767-4665-8542-cd383fbb8854', 1)
+INSERT [dbo].[ProductXTrolley] ([ProductId], [TrolleyId], [Quantity]) VALUES (N'A1D0B914-A7B5-481A-B7F6-C4A7C1FADABD', N'11902c5a-6f75-4d0c-87b7-76d7712445f1', 3)
+INSERT [dbo].[ProductXTrolley] ([ProductId], [TrolleyId], [Quantity]) VALUES (N'BE479712-737F-4703-9D33-FE6EA3428CC9', N'390e0708-2616-4d7b-937b-20cd894f3c39', 2)
 INSERT [dbo].[ProductXTrolley] ([ProductId], [TrolleyId], [Quantity]) VALUES (N'BE479712-737F-4703-9D33-FE6EA3428CC9', N'd6075852-46ce-415c-a6ea-49fec6a5290d', 2)
+INSERT [dbo].[ProductXTrolley] ([ProductId], [TrolleyId], [Quantity]) VALUES (N'C289B345-4A19-420B-8F17-05661C2ACDE7', N'10b645d1-dfa2-4233-b34e-751bf9c62da7', 1)
+INSERT [dbo].[ProductXTrolley] ([ProductId], [TrolleyId], [Quantity]) VALUES (N'C5C6A86A-8600-47BF-8869-9E4C0DADB0A8', N'11902c5a-6f75-4d0c-87b7-76d7712445f1', 5)
 INSERT [dbo].[ProductXTrolley] ([ProductId], [TrolleyId], [Quantity]) VALUES (N'C5C6A86A-8600-47BF-8869-9E4C0DADB0A8', N'44c5759a-3530-4f70-b87f-d4f33e8b5920', 3)
 GO
+INSERT [dbo].[Transaction] ([Id], [Amount], [AmountConverted], [UserId], [ExchangeId], [TransactionDate]) VALUES (N'5b55eb03-1352-43cc-bc89-0da77e349a55', 5000, 1932.1326803240111, N'0bedfa6d-eb0d-40ac-9e80-a4e6b5f33a8f', N'89B03736-C14D-4F93-8E4B-C1D29E7AB905', CAST(N'2023-10-12T20:51:41.5038000' AS DateTime2))
 INSERT [dbo].[Transaction] ([Id], [Amount], [AmountConverted], [UserId], [ExchangeId], [TransactionDate]) VALUES (N'797ab861-92f3-4ffe-a704-95bd284f8687', 77, 3140.168955, N'8fc03854-ef89-42ca-9136-4f493974bea9', N'06CF404D-A548-4BA8-BDDB-27255F6F58A4', CAST(N'2023-10-11T00:52:36.8872262' AS DateTime2))
 INSERT [dbo].[Transaction] ([Id], [Amount], [AmountConverted], [UserId], [ExchangeId], [TransactionDate]) VALUES (N'a75523fd-ca4d-4dbd-86ca-09506c7761e8', 20, 1770.8141, N'8fc03854-ef89-42ca-9136-4f493974bea9', N'826C453B-64D9-4BF0-8B74-CE9B7500CEA7', CAST(N'2023-10-11T00:28:38.5495364' AS DateTime2))
 INSERT [dbo].[Transaction] ([Id], [Amount], [AmountConverted], [UserId], [ExchangeId], [TransactionDate]) VALUES (N'c89f0bcd-c85e-497d-80cd-92e59682ffd3', 2, 0.032211277116580471, N'8fc03854-ef89-42ca-9136-4f493974bea9', N'2293F0EF-E3C7-4607-BC8B-6C4E9C8E61FC', CAST(N'2023-10-11T00:51:19.4404234' AS DateTime2))
+INSERT [dbo].[Transaction] ([Id], [Amount], [AmountConverted], [UserId], [ExchangeId], [TransactionDate]) VALUES (N'c8ade328-256c-461d-a3be-a9dd3db0b10c', 50, 0.63872324027467864, N'0bedfa6d-eb0d-40ac-9e80-a4e6b5f33a8f', N'84E4584E-F687-4575-8F46-3F57CE806D80', CAST(N'2023-10-12T21:56:03.9590058' AS DateTime2))
+INSERT [dbo].[Transaction] ([Id], [Amount], [AmountConverted], [UserId], [ExchangeId], [TransactionDate]) VALUES (N'e1ea82ba-b783-4087-83a0-607d38f58ab3', 2000, 172804.294, N'0bedfa6d-eb0d-40ac-9e80-a4e6b5f33a8f', N'24F0ECA5-A9D5-4277-8278-A166442EB1A2', CAST(N'2023-10-12T22:24:55.1742634' AS DateTime2))
 GO
-INSERT [dbo].[Trolley] ([Id], [IsCurrent], [UserId], [TransactionDate], [Total]) VALUES (N'1bd4165b-2f6f-4c46-90ee-3e69f773f58f', 0, N'f285ebad-a0e2-4d16-bf4c-5bc983a0d1f1', CAST(N'2023-10-10T19:02:36.6645618' AS DateTime2), 51.769999999999996)
-INSERT [dbo].[Trolley] ([Id], [IsCurrent], [UserId], [TransactionDate], [Total]) VALUES (N'26180364-efeb-4f76-bfcc-3ae13258a4bf', 1, N'f285ebad-a0e2-4d16-bf4c-5bc983a0d1f1', CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[Trolley] ([Id], [IsCurrent], [UserId], [TransactionDate], [Total]) VALUES (N'10b645d1-dfa2-4233-b34e-751bf9c62da7', 0, N'0bedfa6d-eb0d-40ac-9e80-a4e6b5f33a8f', CAST(N'2023-10-12T21:56:49.2622673' AS DateTime2), 25)
+INSERT [dbo].[Trolley] ([Id], [IsCurrent], [UserId], [TransactionDate], [Total]) VALUES (N'11902c5a-6f75-4d0c-87b7-76d7712445f1', 0, N'0bedfa6d-eb0d-40ac-9e80-a4e6b5f33a8f', CAST(N'2023-10-16T19:56:14.5324666' AS DateTime2), 276.53)
+INSERT [dbo].[Trolley] ([Id], [IsCurrent], [UserId], [TransactionDate], [Total]) VALUES (N'390e0708-2616-4d7b-937b-20cd894f3c39', 0, N'0bedfa6d-eb0d-40ac-9e80-a4e6b5f33a8f', CAST(N'2023-10-12T22:23:48.5206809' AS DateTime2), 55.48)
+INSERT [dbo].[Trolley] ([Id], [IsCurrent], [UserId], [TransactionDate], [Total]) VALUES (N'3eae51f6-e767-4665-8542-cd383fbb8854', 0, N'0bedfa6d-eb0d-40ac-9e80-a4e6b5f33a8f', CAST(N'2023-10-17T14:46:43.9745877' AS DateTime2), 101.89999999999999)
+INSERT [dbo].[Trolley] ([Id], [IsCurrent], [UserId], [TransactionDate], [Total]) VALUES (N'43bac100-b8b1-45fa-b917-d23a00a31c64', 0, N'0bedfa6d-eb0d-40ac-9e80-a4e6b5f33a8f', CAST(N'2023-10-17T14:47:42.0335106' AS DateTime2), 49.879999999999995)
 INSERT [dbo].[Trolley] ([Id], [IsCurrent], [UserId], [TransactionDate], [Total]) VALUES (N'44c5759a-3530-4f70-b87f-d4f33e8b5920', 0, N'8fc03854-ef89-42ca-9136-4f493974bea9', CAST(N'2023-10-10T23:55:50.0849751' AS DateTime2), 96.19)
 INSERT [dbo].[Trolley] ([Id], [IsCurrent], [UserId], [TransactionDate], [Total]) VALUES (N'6c3eb0c2-f61c-4051-b74e-85edb95d526f', 0, N'8fc03854-ef89-42ca-9136-4f493974bea9', CAST(N'2023-10-10T23:50:18.7602609' AS DateTime2), 41.48)
 INSERT [dbo].[Trolley] ([Id], [IsCurrent], [UserId], [TransactionDate], [Total]) VALUES (N'865293c6-9155-407c-8b92-33b423cd460a', 1, N'8fc03854-ef89-42ca-9136-4f493974bea9', CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
+INSERT [dbo].[Trolley] ([Id], [IsCurrent], [UserId], [TransactionDate], [Total]) VALUES (N'bca26b31-c1ad-4a5e-af39-45f9328803e9', 1, N'0bedfa6d-eb0d-40ac-9e80-a4e6b5f33a8f', CAST(N'0001-01-01T00:00:00.0000000' AS DateTime2), 0)
 INSERT [dbo].[Trolley] ([Id], [IsCurrent], [UserId], [TransactionDate], [Total]) VALUES (N'd6075852-46ce-415c-a6ea-49fec6a5290d', 0, N'8fc03854-ef89-42ca-9136-4f493974bea9', CAST(N'2023-10-10T23:52:30.4263128' AS DateTime2), 43.39)
+INSERT [dbo].[Trolley] ([Id], [IsCurrent], [UserId], [TransactionDate], [Total]) VALUES (N'f164d089-1fd3-482c-ade3-362be937b7b7', 0, N'0bedfa6d-eb0d-40ac-9e80-a4e6b5f33a8f', CAST(N'2023-10-12T21:01:12.5338073' AS DateTime2), 29.22)
 GO
 ALTER TABLE [dbo].[AspNetRoleClaims]  WITH CHECK ADD  CONSTRAINT [FK_AspNetRoleClaims_AspNetRoles_RoleId] FOREIGN KEY([RoleId])
     REFERENCES [dbo].[AspNetRoles] ([Id])

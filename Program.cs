@@ -29,7 +29,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IExchangeService, ExchangeService>();
 builder.Services.AddScoped<ICountryService, CountryService>();
 
-
+builder.Services.AddScoped<ITrolleyViewModel, TrolleyViewModel>();
 builder.Services.AddScoped<IUserDetailViewModel,UserDetailViewModel>();
 builder.Services.AddScoped<ILoginViewModel, LoginViewModel>();
 builder.Services.AddScoped<IManagementProductViewModel, ManagementProductViewModel>();

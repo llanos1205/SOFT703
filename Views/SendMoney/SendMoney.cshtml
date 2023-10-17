@@ -60,31 +60,22 @@
 @section Scripts {
     <script>
        $(document).ready(function () {
-           // Function to calculate and update the total conversion
            function updateTotalConversion() {
                var exchangeRate = parseFloat($('#ExchangeRate').val()) || 1.00;
                var amountToSend = parseFloat($('#AmountToSend').val()) || 0.00;
                var totalConversion = (exchangeRate * amountToSend).toFixed(2);
                $('#TotalConversionLabel').text(totalConversion);
            }
-
-           // Initialize the Exchange Rate label
            var exchangeRate = parseFloat($('#ExchangeRate').val()) || 1.00;
            $('#ExchangeRateLabel').text(exchangeRate.toFixed(2));
-       
-           // Handle input change event for the "Amount to Send" input
            $('#AmountToSend').on('input', updateTotalConversion);
-       
-           // Handle change events of sender and receiver country select elements
            $('#SelectedSenderCountryId, #SelectedReceiverCountryId, #SelectedAgentId').change(function () {
                var senderCountryId = $('#SelectedSenderCountryId').val();
                var receiverCountryId = $('#SelectedReceiverCountryId').val();
        
                if (senderCountryId === receiverCountryId) {
-                   // Countries are the same, set the Exchange Rate to 1.00
                    $('#ExchangeRateLabel').text('1.00');
                } else {
-                   // Send an AJAX request to fetch the Exchange Rate from the server
                    $.ajax({
                        url: '/SendMoney/GetExchangeRate',
                        method: 'GET',
@@ -94,13 +85,8 @@
                            agentId: $('#SelectedAgentId').val()
                        },
                        success: function (data) {
-                           // Update the Exchange Rate label in the view
                            $('#ExchangeRateLabel').text(data.exchangeRate);
-       
-                           // Update the hidden input field with the new exchange rate
                            $('#ExchangeRate').val(data.exchangeRate);
-       
-                           // Update the total conversion
                            updateTotalConversion();
                        },
                        error: function () {
@@ -110,11 +96,9 @@
                }
            });
 
-           // Handle click event for the "Send Money" button
+ 
            $('#SendMoneyButton').on('click', function (e) {
-               e.preventDefault(); // Prevent the default form submission behavior
-
-               // Confirm the user's action (you can use a library like SweetAlert for a better UI)
+               e.preventDefault();
                var confirmed = confirm('Are you sure you want to send money?');
 
                if (confirmed) {
@@ -123,7 +107,6 @@
                }
            });
 
-           // Initial update of total conversion
            updateTotalConversion();
        });
     </script>

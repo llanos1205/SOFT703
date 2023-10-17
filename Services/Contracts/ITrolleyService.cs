@@ -9,5 +9,6 @@ public interface ITrolleyService:IBaseService<Trolley>
     Task<Trolley> AddProduct(string id, string productId);
     Task<Trolley> RemoveProduct(string id, string productId);
     Task<Trolley> CheckOut(string trolleyId);
+    Task<Trolley?> GetExtendedTrolley(string trolleyId);
     
 }

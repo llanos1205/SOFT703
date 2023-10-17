@@ -65,6 +65,9 @@
             <tr>
                 <td>@trolley.TransactionDate</td>
                 <td>@trolley.Total</td>
+                <td>
+                    <a href="@Url.Action("Detail", "Trolley", new { id = trolley.Id })" class="btn btn-primary">Detail</a>
+                </td>
             </tr>
         }
     }
