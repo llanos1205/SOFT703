@@ -45,7 +45,6 @@ public class SendMoneyController : Controller
             _sendMoneyViewModel.SelectedAgentId = viewModel.SelectedAgentId;
             _sendMoneyViewModel.SelectedSenderCountryId = viewModel.SelectedSenderCountryId;
             _sendMoneyViewModel.SelectedReceiverCountryId = viewModel.SelectedReceiverCountryId;
-           //create a transaction with the current agent, countires and exchange rate
            await _sendMoneyViewModel.CreateTransaction();
         }
 

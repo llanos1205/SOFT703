@@ -21,22 +21,9 @@ builder.Services.AddIdentity<User, Role>(options => options.SignIn.RequireConfir
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.ConfigureApplicationCookie(options => { options.LoginPath = "/Login/Login"; });
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IAgentService, AgentService>();
-builder.Services.AddScoped<ITransactionService, TransactionService>();
-builder.Services.AddScoped<ITrolleyService, TrolleyService>();
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IExchangeService, ExchangeService>();
-builder.Services.AddScoped<ICountryService, CountryService>();
+LoadServices(builder);
+LoadViewModels(builder);
 
-builder.Services.AddScoped<ITrolleyViewModel, TrolleyViewModel>();
-builder.Services.AddScoped<IUserDetailViewModel,UserDetailViewModel>();
-builder.Services.AddScoped<ILoginViewModel, LoginViewModel>();
-builder.Services.AddScoped<IManagementProductViewModel, ManagementProductViewModel>();
-builder.Services.AddScoped<IAgentsViewModel, AgentsViewModel>();
-builder.Services.AddScoped<IManagementUserViewModel, ManagementUserViewModel>();
-builder.Services.AddScoped<IMarketPlaceViewModel, MarketPlaceViewModel>();
-builder.Services.AddScoped<ISendMoneyViewModel, SendMoneyViewModel>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -63,3 +50,27 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.Run();
+
+void LoadServices(WebApplicationBuilder builder)
+{
+    builder.Services.AddScoped<IProductService, ProductService>();
+    builder.Services.AddScoped<IAgentService, AgentService>();
+    builder.Services.AddScoped<ITransactionService, TransactionService>();
+    builder.Services.AddScoped<ITrolleyService, TrolleyService>();
+    builder.Services.AddScoped<IUserService, UserService>();
+    builder.Services.AddScoped<IExchangeService, ExchangeService>();
+    builder.Services.AddScoped<ICountryService, CountryService>();
+
+}
+
+void LoadViewModels(WebApplicationBuilder builder)
+{
+    builder.Services.AddScoped<ITrolleyViewModel, TrolleyViewModel>();
+    builder.Services.AddScoped<IUserDetailViewModel,UserDetailViewModel>();
+    builder.Services.AddScoped<ILoginViewModel, LoginViewModel>();
+    builder.Services.AddScoped<IManagementProductViewModel, ManagementProductViewModel>();
+    builder.Services.AddScoped<IAgentsViewModel, AgentsViewModel>();
+    builder.Services.AddScoped<IManagementUserViewModel, ManagementUserViewModel>();
+    builder.Services.AddScoped<IMarketPlaceViewModel, MarketPlaceViewModel>();
+    builder.Services.AddScoped<ISendMoneyViewModel, SendMoneyViewModel>();
+}

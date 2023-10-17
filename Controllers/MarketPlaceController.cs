@@ -29,8 +29,6 @@ public class MarketPlaceController : Controller
     public async Task<IActionResult> AddToTrolley(string productId)
     {
         await _marketPlaceViewModel.AddToTrolley(productId);
-
-        // Create JsonSerializerOptions with ReferenceHandler.Preserve
         var options = new JsonSerializerOptions
         {
             ReferenceHandler = ReferenceHandler.Preserve
@@ -49,8 +47,6 @@ public class MarketPlaceController : Controller
         {
             ReferenceHandler = ReferenceHandler.Preserve
         };
-
-        // Serialize the CurrentTrolley to JSON
         string trolleyJson = JsonSerializer.Serialize(_marketPlaceViewModel.CurrentTrolley, options);
         return Content(trolleyJson, "application/json");
     }

@@ -30,7 +30,7 @@ public class ManagementProductController : Controller
     {
         if (id != vm.Product.Id)
         {
-            return NotFound(); // Product not found
+            return NotFound(); 
         }
 
         if (ModelState.IsValid)

@@ -25,7 +25,6 @@ public class ManagementUserController : Controller
         _loginViewModel = loginViewModel;
     }
 
-    // GET
     public async Task<IActionResult> Index()
     {
         await _managementUserViewModel.GetAllAsync();
@@ -78,7 +77,6 @@ public class ManagementUserController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Add(LoginViewModel vm)
     {
-        //copy the parameters in the vm parameter to the parameters in the _loginviewmodel
         _loginViewModel.Email = vm.Email;
         _loginViewModel.FirstName = vm.FirstName;
         _loginViewModel.LastName = vm.LastName;

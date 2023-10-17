@@ -54,8 +54,7 @@ public class UserService : GenericBaseService<User>, IUserService
 
     public Task<User?> GetUserTrolleyTransaction(string? id)
     {
-        //if id is null find all transactions related to the calling user, if not null find all the transactions to the user with that id also exlcude any trolley with the variable isCurrent that is true
-
+        
         return id == null
             ? _context.Users.Include(x => x.Transactions)
                 .ThenInclude(x => x.Exchange)
@@ -63,7 +62,7 @@ public class UserService : GenericBaseService<User>, IUserService
                 .Include(x => x.Transactions)
                 .ThenInclude(x => x.Exchange)
                 .ThenInclude(x => x.ReceiverCountry)
-                .Include(x => x.Trolleys.Where(t => !t.IsCurrent))
+                .Include(x => x.Trolleys.Where(t => !t.IsCurrent).OrderBy(x=>x.TransactionDate))
                 .FirstOrDefaultAsync(x => x.Id == GetUserId())
             : _context.Users.Include(x => x.Transactions)
                 .ThenInclude(x => x.Exchange)
@@ -71,7 +70,7 @@ public class UserService : GenericBaseService<User>, IUserService
                 .Include(x => x.Transactions)
                 .ThenInclude(x => x.Exchange)
                 .ThenInclude(x => x.ReceiverCountry)
-                .Include(x => x.Trolleys.Where(t => !t.IsCurrent))
+                .Include(x => x.Trolleys.Where(t => !t.IsCurrent).OrderBy(x=>x.TransactionDate))
                 .FirstOrDefaultAsync(x => x.Id == id);
     }
 

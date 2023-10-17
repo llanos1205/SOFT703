@@ -5,7 +5,6 @@ using SOFT703.Services.Contracts;
 
 namespace SOFT703.Services;
 
-//this class shoul inherit from GenericBaseService
 public class TrolleyService : GenericBaseService<Trolley>, ITrolleyService
 {
     public TrolleyService(ApplicationDbContext context) : base(context)
@@ -14,7 +13,7 @@ public class TrolleyService : GenericBaseService<Trolley>, ITrolleyService
 
     public async Task<Trolley?> GetExtendedTrolley(string trolleyId)
     {
-        //based on the trolley id find the trolley with its products
+        
         return await _context.Trolley.Include(x => x.ProductXTrolleys).ThenInclude(x => x.Product)
             .FirstOrDefaultAsync(x => x.Id == trolleyId);
         
@@ -22,7 +21,6 @@ public class TrolleyService : GenericBaseService<Trolley>, ITrolleyService
 
     public async Task<Trolley?> GetLatest(string id)
     {
-        //find the latest trolley for the user including the products 
         var trolley = await _context.Trolley.Include(x => x.ProductXTrolleys).ThenInclude(x => x.Product)
             .FirstOrDefaultAsync(x => x.UserId == id && x.IsCurrent);
 
@@ -42,14 +40,12 @@ public class TrolleyService : GenericBaseService<Trolley>, ITrolleyService
     {
         var trolley = _context.Trolley.Include(x => x.ProductXTrolleys).ThenInclude(x => x.Product)
             .FirstOrDefault(x => x.Id == id);
-        //with the above trolly recalculate the total
         trolley.Total = trolley.ProductXTrolleys.Sum(x => x.Product.Price * x.Quantity);
         return await UpdateAsync(trolley);
     }
 
     public async Task<Trolley> AddProduct(string id, string productId)
     {
-        //find product by its ID and add it to a trolley
         var product = _context.Product.Find(productId);
         var trolley = _context.Trolley.Include(x => x.ProductXTrolleys).ThenInclude(x => x.Product)
             .FirstOrDefault(x => x.Id == id);
@@ -75,7 +71,6 @@ public class TrolleyService : GenericBaseService<Trolley>, ITrolleyService
 
     public async Task<Trolley> RemoveProduct(string id, string productId)
     {
-        //find product by its ID and remove it from a trolley
         var product = _context.Product.Find(productId);
         var trolley = _context.Trolley.Include(x => x.ProductXTrolleys).ThenInclude(x => x.Product)
             .FirstOrDefault(x => x.Id == id);
