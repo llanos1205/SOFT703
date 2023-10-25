@@ -7,6 +7,8 @@ using SOFT703.Models.ViewModels.Contracts;
 
 namespace SOFT703.Controllers;
 
+
+//Por mas que no sea una api, los endpoints deberían ser sustantivos en plural
 public class ManagementProductController : Controller
 {
     private readonly IManagementProductViewModel _vm;
@@ -23,27 +25,42 @@ public class ManagementProductController : Controller
         return View(_vm);
     }
 
+
+    //Lo mismo evitemos los if anidados, como este metodo es un update tu metodo deberia ser un put o patch
+    // usualemente cuando actualizas algo le mandas el id por la ruta y los datos a actualizar por el body, post no se usa para actualizar
+    //el metodo puede ser asi
+
+    [HttpPut("products/{id}")]
+    public async Task<IActionResult> Edit(int id, [FromBody] object product)
+    {
+        //Y aqui hacer la magia
+
+
+    }
+    
     [HttpPost]
     [Authorize]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(string id, ManagementProductViewModel vm)
     {
-        if (id != vm.Product.Id)
+        //Podes utilizar un if simplificado
+        if (id != vm.Product.Id)    return NotFound(); 
+        
+
+        if (!ModelState.IsValid)
         {
-            return NotFound(); 
+           return View(vm);
         }
 
-        if (ModelState.IsValid)
+        try
         {
-            try
-            {
-                await _vm.UpdateAsync(id, vm.Product);
-                return RedirectToAction("Index");
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                ModelState.AddModelError(string.Empty, "Concurrency error occurred.");
-            }
+            await _vm.UpdateAsync(id, vm.Product);
+            return RedirectToAction("Index");
+        }
+        //Para mas adelante es bueno controlar el tipo de excepciones de manera especifica
+        catch (DbUpdateConcurrencyException)
+        {
+            ModelState.AddModelError(string.Empty, "Concurrency error occurred.");
         }
 
         return View(vm);

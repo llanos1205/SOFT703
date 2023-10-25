@@ -7,6 +7,8 @@ namespace SOFT703.Controllers;
 
 public class AgentsController : Controller
 {
+    //El nombre de tus variables tienen que ser descriptivas
+    //_agentsViewModel
     private readonly IAgentsViewModel _vm;
 
     public AgentsController(IAgentsViewModel vm)

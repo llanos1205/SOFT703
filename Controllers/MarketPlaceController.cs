@@ -2,6 +2,7 @@
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using SOFT703.Models.ViewModels.Contracts;
 
 namespace SOFT703.Controllers;
@@ -15,7 +16,7 @@ public class MarketPlaceController : Controller
         _marketPlaceViewModel = vm;
     }
 
-
+    
     [Authorize]
     public async Task<IActionResult> MarketPlace()
     {
