@@ -12,12 +12,13 @@ namespace SOFT703.Controllers;
 
 public class LoginController : Controller
 {
-    private readonly ILoginViewModel _vm;
+    //Cambiar el nombre de tus variables igual
+    private readonly ILoginViewModel _loginVM;
     private readonly IUserDetailViewModel  _userDetailViewModel;
 
     public LoginController( ILoginViewModel vm, IUserDetailViewModel userDetailViewModel)
     {
-        _vm = vm;
+        _loginVM = vm;
         _userDetailViewModel = userDetailViewModel;
     }
 
@@ -35,9 +36,9 @@ public class LoginController : Controller
     {
         if (ModelState.IsValid)
         {
-            _vm.Email = model.Email;
-            _vm.Password = model.Password;
-            if (await _vm.Login())
+            _loginVM.Email = model.Email;
+            _loginVM.Password = model.Password;
+            if (await _loginVM.Login())
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -58,30 +59,27 @@ public class LoginController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> SignIn(LoginViewModel model)
     {
-        if (ModelState.IsValid)
-        {
-            _vm.Password = model.Password;
-            _vm.Email = model.Email;
-            _vm.FirstName = model.FirstName;
-            _vm.LastName = model.LastName;
-            _vm.PhoneNumber = model.PhoneNumber;
-            if (await _vm.SignIn())
-            {
-                return RedirectToAction("Index", "Home");
-            }
 
-            else
-            {
-                ModelState.AddModelError(string.Empty, "Invalid email or password. Please try again.");
-            }
-        }
+        //Podes invertir tu condicion para no tener muchos if anidados. Es buena practica evitar eso
+        
+        if(!ModelState.IsValid) return View("SignIn", model);
+        
+        _loginVM.Password = model.Password;
+        _loginVM.Email = model.Email;
+        _loginVM.FirstName = model.FirstName;
+        _loginVM.LastName = model.LastName;
+        _loginVM.PhoneNumber = model.PhoneNumber;
 
+        if (await _loginVM.SignIn()) return RedirectToAction("Index", "Home");
+        
+        ModelState.AddModelError(string.Empty, "Invalid email or password. Please try again.");
+        
         return View("SignIn", model);
     }
 
     public async Task<IActionResult> LogOut()
     {
-        await _vm.LogOut(); 
+        await _loginVM.LogOut(); 
         return RedirectToAction("Index", "Home");
     }
 

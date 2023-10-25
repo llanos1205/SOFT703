@@ -21,20 +21,11 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, string>
     {
     }
 
+
+    //No hay nada de malo con esto, pero sería mejor separarlo por clases por entidad para tener mejor legibilidad
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<ProductXTrolley>()
-            .HasKey(pt => new { pt.ProductId, pt.TrolleyId });
-
-        modelBuilder.Entity<ProductXTrolley>()
-            .HasOne(pt => pt.Product)
-            .WithMany(p => p.ProductXTrolleys)
-            .HasForeignKey(pt => pt.ProductId);
-
-        modelBuilder.Entity<ProductXTrolley>()
-            .HasOne(pt => pt.Trolley)
-            .WithMany(t => t.ProductXTrolleys)
-            .HasForeignKey(pt => pt.TrolleyId);
+        new ProductXTrolleyConfiguration().Configure(modelBuilder.Entity<ProductXTrolley>());
         modelBuilder.Entity<Trolley>()
             .HasOne(t => t.User)
             .WithMany(u => u.Trolleys)

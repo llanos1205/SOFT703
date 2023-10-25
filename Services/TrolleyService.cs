@@ -13,7 +13,8 @@ public class TrolleyService : GenericBaseService<Trolley>, ITrolleyService
 
     public async Task<Trolley?> GetExtendedTrolley(string trolleyId)
     {
-        
+        //Si te preocupeas por performante hay que tener cuidado con utilizar muchos includes
+        //Podes mejorar la query utilizando AsNoTracking, AsSplitQuery igual
         return await _context.Trolley.Include(x => x.ProductXTrolleys).ThenInclude(x => x.Product)
             .FirstOrDefaultAsync(x => x.Id == trolleyId);
         
