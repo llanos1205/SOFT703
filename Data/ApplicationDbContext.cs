@@ -25,7 +25,11 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, string>
     //No hay nada de malo con esto, pero sería mejor separarlo por clases por entidad para tener mejor legibilidad
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        new ProductXTrolleyConfiguration().Configure(modelBuilder.Entity<ProductXTrolley>());
+        new ProductXTrolleyConfiguration()
+            .Configure(modelBuilder.Entity<ProductXTrolley>());
+       
+        
+        
         modelBuilder.Entity<Trolley>()
             .HasOne(t => t.User)
             .WithMany(u => u.Trolleys)
